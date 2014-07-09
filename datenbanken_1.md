@@ -70,4 +70,46 @@ Datenelemente 	ANGNR 			Angestelltennummer
 5. Application-Data abhängigkeit wird reduziert. 
 6. DBS verschafft mehr flexilibität für diue Datenauswertung.
 7. Daws DBS kann zentral die Korrektheir von Daten überprüfen. 
-
+## 2. Architektur eines DBS
+### 2.1 Drei Datenebenen
+#### Logische Gesamtsicht
+
+Die Beschreibung  der Gesamtheit der Daten des betrachteten Anwendungsbereiches. Alle Daten werden auf logischer Ebene in Form von Informationseinheiten und deren Beziehungen untereinander beschrieben.
+
+#### Interne Sicht
+
+Wie die Daten auf den Speichern organisiert werden. Muss für die Zugriffsanforderungen der verschiedenen Benutzer optimiert werden.
+#### Externe Sichten
+Verschiedene Darstellung der Daten für verschiedene Benutzergruppen.
+-----
+* Der Benutzer arbeitet Ausschließlich über die Externe Schicht. Das DBMS übernimmt die notwendigen Umsetzungen von einer *externen Schicht -> logische Gesamtsicht -> Interne Sicht*
+* **Schema:** Jede Ebene Besitzt ein **Daten Model** was mit einer **Datenbescheibungsspache** beschrieben weird. Es gibt also:
+ * Verschiedene externe Schemata
+ * Ein konzeptuelles Schema
+ * Internes Schema
+ 
+ ![image](img/database-architecture.png)
+ 
+### 2.2 Das konzeptuelle Modell
+
+* Logische Gesamtsicht.
+* Versucht die Realität abzubilden: alle Daten, und alle Beziehungen dieser Daten.
+* **Integritätsbedingungen:** Beschreiben die Vorschriften zur Existenz dieser Daten, und zur Änderung dieser Daten. (Preconditions & Effects)
+* Die Operationen die auf die Daten ausgeführt werden werden hier auch festgelegt.
+> Bei den heute verbreiteten Relationen Datenbanksystemen gibt es diese Spezifikation von Operationen im konzeptuellen Schema der Datenbank nicht. Alle diese Systeme bieten sogenannte **generische Operationen** an, also Operationen, die auf alle Datentypen in der Datenbank anwendbar sind. Dies sind unter anderem speichern, lesen, löschen und modifizieren. Der Zugriff auf die Datenbank erfolgt mittels einer **Datenmanipulationssprache**, die diese Operationen zur Verfügung stellt.
+*  **Objektorientierten Datenbanken**: jüngere Datenbanken wo Operationen als teil vom Schema festgelegt wurden.
+* **Datenbescheibungsprache** *data definition language, DDL* ist für die Beschreibung des konzeptuelle Model geignet.
+
+
+
+> Beachten Sie den Unterschied zwischen den Begriffen „Datenbanksystem“ und „Informationssystem“. Leider werden beide Begriffe oft synonym verwendet. Das Informationssystem eines Unternehmens ist die Gesamtheit aller Instanzen und Prozesse, die die für das Unternehmen wichtige Information von außen aufnehmen, verarbeiten und entsprechende Information nach außen wieder abgeben. Das Datenbanksystem ist damit nur ein Teil des Informationssystems, nämlich derjenige Teil, in dem die Informationsbasis des Unternehmens verwaltet wird.
+
+#### Vorteile des Konzeptuellen Modells:
+
+1. Bietet einen stabilen Bezugspunkt für alle Anwendungen dar.
+2. Stellt eine einheitliche Dokumentation wesentlicher Aspekte des Unternehmens dar.
+3. Gebrauch der Daten kann zentral kontrolliert werden.
+4. Schafft die wesentliche Vorraussetzungen für Datenunabhängigkeit der Anwendungsprogramme.
+
+### 2.3 Das interne Modell
+
