@@ -1,8 +1,8 @@
 # DATENBANKEN 1
 
-## EINFÜHRUNG
+## 1. EINFÜHRUNG
 
-### DAS KONZEPT DES DATENBANKSYSTEMS
+### 1.1 DAS KONZEPT DES DATENBANKSYSTEMS
 
 **Begriff der Datenbank:**
 
@@ -13,7 +13,7 @@
 
 Ein DBMS isoliert die DB von den Anwendungsprogrammen, sodass der Programmierer die Details der Datenbank nicht kennen muss. 
 
-### Datenbanksysteme und traditionelle Datenverwaltung
+### 1.2 Datenbanksysteme und traditionelle Datenverwaltung
 
 **Dateisysteme** (file systems), als konventionelle Form der Verwaltung großer Datenmengen.
 
@@ -53,6 +53,8 @@ Datenelemente 	ANGNR 			Angestelltennummer
 		02 PERS; ... .
 		02 GEHALT; ... .````
 Es herrscht also eine enge Kopplung zwischen Programm und Datei, dies führt zu schwierige probleme:
+
+#### Probleme der traditionelle Datenverwaltung
 1. **Redudanz**
 > Da die Daten jeweils speziell für bestimmte Anwendungen entworfen werden, werden dieselben Daten in verschiedenen Dateien wieder auftauchen. Redundanz führt zu Speicherverschwendung und zu erhöhten Verarbeitungskosten, vor allem bei Änderungen. Schlimmer jedoch ist es, dass diese Redundanz in der Regel nicht zentral kontrolliert wird, so dass Konsistenzprobleme auftreten. 2. **Inkonsistenz**
 > Die Konsistenz der Daten (d.h. die logische Übereinstrimmung der Datei-Inhalte) kann nur schwer gewährleistet werden. Bei der Änderung einer Gröse müssten alle Dateien geändert werden, die diese Größe beinhalten. und diese verschiedene Programme zum selben Zeitpunkt unterschiedliche Werte derselben Größe sehen können.3. **Daten-Programm-Abhängigkeit**
@@ -68,4 +70,4 @@ Datenelemente 	ANGNR 			Angestelltennummer
 5. Application-Data abhängigkeit wird reduziert. 
 6. DBS verschafft mehr flexilibität für diue Datenauswertung.
 7. Daws DBS kann zentral die Korrektheir von Daten überprüfen. 
-
+
