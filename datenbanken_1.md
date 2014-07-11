@@ -188,3 +188,37 @@ geht die Abarbeitung wie folgt vor:
 * Hierzu gehören alle technischen Maßnahmen zum Datenschutz, d.h. zum Schutz der Daten gegen Missbrauch jeglicher Art.
 
 
+### 2.6 Weitere Komponenten eines Datenbanksystems
+
+#### Tools
+
+Typische Tools sind
+* Abfragesysteme* Report-Writer* Spreadsheets und Business Graphics Tools* Tools für den Datenbankentwurf* 4GL Entwicklungsumgebungen. 4GL (fourth generation language, Da-tenbanksprachen der vierten Generation) integrieren imperative Sprach-konzepte mit SQL. Sie unterstützen typischerweise die interaktive Pro-grammierung von Menüs, Masken und Formularen mit dahinterliegenden Prozeduren (Auslöseregeln und Aktionen).* CASE Tools (computer aided software engineering) für den Entwurf von Datenbankanwendungen
+
+#### Utilities
+
+* „nützliche Sachen“
+* Hilfsprogramme für den Datenbankadministra-tor.
+* Typische Utilities sind:  * Laderoutinen (für das erstmalige Laden der Datenbank)  * statistische Routinen  * Routinen zur Fehleranalyse  * Routinen zur Reorganisation (der Daten auf den Speichern)  * Kopier- und Archivierungsroutinen
+
+
+#### Data Dictionary und Repository
+
+**Funktionen:**
+
+1. Es dient dem DBMS zur Speicherung der Daten zur Verwaltung der Datenbank (Schema-Informationen, Sichten, Zugriffsrechte, Informationen zur Optimierung von Anfragen wie etwa Statistiken usw.).2. Es dient dem Anwendungsprogrammierer zur Suche nach Informationen über gespeicherte Daten und deren Struktur (Schema-Informationen) sowie zur Analyse bei Leistungsproblemen.
+
+* Data Dictionary ist eine Datenbank.
+* Data Dictionaries wachsen heutzutage zu **Repositories** wo alle wesentliche Informationen über die Daten, Programme und Benutzer des Informationssystems gespeichert werden.
+* Ein modernes Data Dictionary System wird etwa folgende Informationen verwalten:  * Beschreibungen der Daten  * Angaben zu den Beziehungen zwischen den Daten  * Beschreibungen der Programme (Transaktionen)  * Angaben darüber, welche Programme welche Daten nutzen  * Konsistenzbedingungen  * Angaben über Zugriffsbefugnisse  * Entwurfsdaten (grafische konzeptuelle Modelle, Dokumentation der Entwurfsschritte usw.)  * Verantwortlichkeiten  * Entwurfsdokumente, Quell-Code zu Anwendungsprogrammen
+
+### 2.7 Datenunabhängigkeit
+
+* Die dreischichtige Betrachtungsweise der Daten ist der Schlüssel zur Datenunabhängigkeit.
+* Änderungen innerhalb einer Ebene können in gewissem Umfang von den übrigen Ebenen ferngehalten werden, indem man die Änderun-gen durch die zwischengelagerten Transformationsregeln auffängt.
+> **Physische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen der physischen Datenorganisation.
+* Da das konzeptuelle Modell unberührt bleibt, bleiben auch die externen Modelle und damit alle Benutzerprogramme von Änderungen der Datenorganisation unberührt. So führen also Änderungen von *Dateiorganisationen*, das *Umstrukturieren von Sätzen* (z. B. Zerlegen von großen Sätzen in separate Teilsätze), das *Anlegen von Indexen*, usw. nicht mehr zu Änderungen bestehender Programme.
+> **Logische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen des konzeptuellen Modells.
+* Praktisch alle Systeme weisen jedoch noch kleinere oder größere Schwächen in diesem Punkte auf.
+> Der Begriff der Datenunabhängigkeit muss auch unter dem Gesichtspunkt des Bindens gesehen werden. Im Falle des Bindens zur Übersetzungszeit bleibt das Anwendungsprogramm nach Änderungen des internen oder konzeptuellen Schemas unverändert, muss aber neu übersetzt werden. Man spricht von **statischer Datenunabhängigkeit**. Im Falle des Bindens zur Zugriffszeit ist auch diese Abhängigkeit aufgehoben, man spricht von **dynamischer Datenunabhängigkeit**.
+
