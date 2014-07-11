@@ -98,7 +98,7 @@ Wie die Daten auf den Speichern organisiert werden. Muss für die Zugriffsanford
 * Die Operationen die auf die Daten ausgeführt werden werden hier auch festgelegt.
 > Bei den heute verbreiteten Relationen Datenbanksystemen gibt es diese Spezifikation von Operationen im konzeptuellen Schema der Datenbank nicht. Alle diese Systeme bieten sogenannte **generische Operationen** an, also Operationen, die auf alle Datentypen in der Datenbank anwendbar sind. Dies sind unter anderem speichern, lesen, löschen und modifizieren. Der Zugriff auf die Datenbank erfolgt mittels einer **Datenmanipulationssprache**, die diese Operationen zur Verfügung stellt.
 *  **Objektorientierten Datenbanken**: jüngere Datenbanken wo Operationen als teil vom Schema festgelegt wurden.
-* **Datenbescheibungsprache** *data definition language, DDL* ist für die Beschreibung des konzeptuelle Model geignet.
+* **Datenbescheibungsprache** *data definition language, DDL* ist für die Beschreibung des konzeptuelle Model geeignet.
 
 
 
@@ -112,4 +112,79 @@ Wie die Daten auf den Speichern organisiert werden. Muss für die Zugriffsanford
 4. Schafft die wesentliche Vorraussetzungen für Datenunabhängigkeit der Anwendungsprogramme.
 
 ### 2.3 Das interne Modell
+
+* Der Datenbankadministrator muss eine *physische Datenorganisation* entwickeln. 
+* Folgende Punkte müssen betrachtet werden bei dem Entwurf
+ * Repräsentation von Attributwerten.
+ * Aufbau gespeicherter Sätze.
+ * Zugriffsmethoden auf Sätze.
+ * zusätzliche Zugriffspfade(Indexe, Verkettung, usw.)
+ 
+### 2.4 Externe Modelle
+
+* Verschiedene Benutzergruppen bekommen ihre eigene **View**.
+* Benutzer müssen eine Sprache bekommen um die Daten zu benutzen, z.B. SQL, oder eine GUI
+
+### 2.5 Das DBMS
+
+Wenn ein Anwendungsprogramm Daten von von DBMS verlangt:
+
+> 1. Das DBMS empfängt den Befehl des Anwendungsprogrammes, ein bestimmtes Objekt eines externen Modells zu lesen.> 2. Das DBMS holt sich die benötigten Definitionen des entsprechenden Objekt-typs aus dem zugehörigen externen Schema.> 3. Mit Hilfe der Transformationsregeln externes/konzeptuelles Schema stellt das DBMS fest, welche konzeptuellen Objekte und Beziehungen benötigt wer-den.> 4. Mit Hilfe der Transformationsregeln konzeptuelles/internes Schema stellt das DBMS fest, welche physischen Objekte zu lesen sind, es ermittelt die auszu-nützenden Zugriffspfade.> 5. Das DBMS übergibt dem Betriebssystem die Nummern der zu lesenden Spei-cherblöcke.> 6. Das Betriebssystem übergibt die verlangten Blöcke an das DBMS in einem Systempuffer.> 7. Mit Hilfe der Transformationsregeln stellt das DBMS aus den vorhandenen physischen Sätzen das verlangte externe Objekt zusammen.
+> 8. Das DBMS übergibt das externe Objekt dem Anwendungsprogramm in sei-nen Arbeitsspeicher.> 9. Das Anwendungsprogramm verarbeitet die vom DBMS übergebenen Daten.
+ 
+Alternativ kann aus das **Binden** benutzt werden: 
+>Um den Befehl eines Anwendungs-programms auszuführen, müssen die Objekte des externen Modells ausgedrückt werden durch Objekte des konzeptuellen Modells und schließlich durch Objekte des internen Modells. Sobald der Befehl, der sich auf ein externes Objekt bezieht, ersetzt ist durch Befehle, die sich auf das konzeptuelle Modell beziehen, sind die entsprechenden Daten des Anwendungsprogrammes an das konzeptuelle Modell „gebunden“, entsprechend für das interne Modell
+
+Der **Bindezeitpunkt** kenn entweder zur *Übersetzungszeit* (compilation) oder zur *Laufzeit* (Interpretation) stattfinden.
+
+![Funktionsweise Des DBMS](img/funktionsweise_des_dbms.png)
+
+Für ein SQL befehlt wie 
+
+````
+SELECT ANGNR, NAME, GEHALTFROM   ANGWHERE  ANGNR = 12
+````
+geht die Abarbeitung wie folgt vor:
+
+1. Der DML-Befehlt wird an das DBMS übergeben.
+2. Befehlt wird interpretiert, zugehörige konzeptionelle Beschreibung werden ermittelt. 
+3. Speicherstruktur wird ermittelt (internes Schema), die Abfrage wird optimiert.
+4. Das DBMS ermittelt die Datenseite auf der der gesuchte Satz gespeichert ist. Es prüft ob die Seite im Systempuffer gespeichert ist. If yes, then continue from 8.
+5. Auswahl einer Seite im Systempuffer, die durch die benötigte Seite überlagert werden kann. Falls die zu ersetzende Seite verändert wurde, muss sie in die Datenbank geschrieben werden.
+6. Das DBMS ruft das Betriebssystem für zwei E/A-Vorgänge auf: * Schreiben der zu ersetzenden Seite in die Datenbank (entfällt gegebenen-falls) * Einlesen der gesuchten Seite.
+7. Das Betriebssystem führt die physischen E/A-Aufträge durch und speichert die angeforderte Seite an der vorgegebenen Adresse im Systempuffer.
+8. Das DBMS liest den gesuchten Satz aus dem Systempuffer, transformiert ihn in die durch das externe Schema definierte Form und überträgt ihn in den Ar-beitsbereich (user work area - UWA) des Anwendungsprogrammes. In der UWA ist ein Speicherbereich für diesen Satztyp reserviert.
+9. Das DBMS hinterlegt Status-Information über den Ausgang der Operation in einem speziellen Bereich der UWA. Diese Status-Information ist dem An-wendungsprogramm zugänglich.
+10. Das Anwendungsprogramm verarbeitet den Satz. (Wir betrachten hier nicht die Abläufe auf der Sprachebene, wenn - wie in diesem Beispiel angedeutet - SQL in ein Programm in einer klassischen Programmiersprache eingebettet ist; s. unter relationale Datenbanken).
+
+#### Weitere Aufgaben des DBMS
+##### Datendefinition
+
+* Das DBMS muss Datendefinitionen in den zugehörigen DDLs akzeptieren und interpretieren können. Dazu gehört:
+  * externe Schemata
+  * das konzeptuelle Schema,
+  * das interne Schema
+  * die zugehörigen Transformationsregeln
+  * Meta-Daten. z.B:
+    * Objekttypen
+    * Attribute
+* Die Daten werden im **Katalog** a.k.a. **Data Dictionary** des DBMS gespeichert.
+
+##### Integrität der DAtenbank
+
+* Das DBMS soll soweit wie möglich Integritätsverletzungen verhindern. 
+
+##### Datensicherung (Recovery)
+
+* Fehlern: Abbrüche von Anwendungsprogrammen, Systemzusammenbruch, Plattenfehler, etc.
+* Das DBMS muss in der Lage sein die Datenbank nach Fehlern wieder in einen konsistenten Zustand zu versetzen.
+
+##### Koordination gleichzeitig auf der Datenbank arbeitender Benutzer
+
+* Das DBMS muss dafür Sorgen das die parallel arbeitenden Programme nicht gegenseitig stören oder infolge unkoordinierter Parallelarbeit die Integrität der Datenbank zerstören.
+
+##### Schutz der Daten gegen unberechtigten Zugriff
+
+* Hierzu gehören alle technischen Maßnahmen zum Datenschutz, d.h. zum Schutz der Daten gegen Missbrauch jeglicher Art.
+
 
