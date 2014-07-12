@@ -222,3 +222,68 @@ Typische Tools sind
 * Praktisch alle Systeme weisen jedoch noch kleinere oder größere Schwächen in diesem Punkte auf.
 > Der Begriff der Datenunabhängigkeit muss auch unter dem Gesichtspunkt des Bindens gesehen werden. Im Falle des Bindens zur Übersetzungszeit bleibt das Anwendungsprogramm nach Änderungen des internen oder konzeptuellen Schemas unverändert, muss aber neu übersetzt werden. Man spricht von **statischer Datenunabhängigkeit**. Im Falle des Bindens zur Zugriffszeit ist auch diese Abhängigkeit aufgehoben, man spricht von **dynamischer Datenunabhängigkeit**.
 
+### 2.8 Ein Datenmodell für die Konzeptuelle Ebene
+
+* Die Beschreibung der Datenwelt des Unternehmens erfolgt in den Begriffen einesDatenmodells.* Das Datenmodell muss mächtig genug sein, um alle wichtigen Aspekte der Realwelt beschreiben zu können, zugleich muss es möglich sein, in einfacher Weise eine effiziente Implementierung auf der internen Ebene abzuleiten.* Relationalen Datenbanksysteme bieten mit relationalen Modell kein befriedigendes Datenmodell.
+* Neuere Modelle sind das **objektrelationale** und das **objektorientierte** Datenmodell.
+* **Semantische Datenmodelle** werden benutzt um die Welt zu beschreiben, dann werden die vereinfacht und als das konzeptuelles Model für das DBS abgeleitet.
+
+#### ER-Model
+
+* Das ER-Modell kennt folgende Basiskonstrukte  * Entity-Typ (entity type)  * Beziehungstyp (relationship type)  * Entity-Typen und Beziehungstypen haben Attribute  * Zu jedem Typ gibt es dann beliebig viele Instanzen, also Entities und Beziehungen.
+
+##### Entities 
+
+* Objekte der realen Welt.
+* Zwischen den Entities gibt es Beziehungen.
+* Ein **Entity-Typ** repräsentiert die Menge aller Entities, die die gleichen charakteristischen Eigenschaften besitzen
+* **Entity-Typen** stehen zugleich für die Menge aller Entities die zu diesen Typ gehören. 
+
+##### Relationships
+
+* Beziehungen
+* Ein Bezie-hungstyp kann mehrere Entity Typen umfassen; wir schreiben $$$B(E_1, E_2, ... E_k)$$$ .
+* In der praktischen Anwendung ist die Mehrzahl der Beziehungen zweistellig.
+
+##### Attributes
+
+* Jedes **Attribut** kann Werte aus einem bestimmten **Wertebereich** annehmen.
+
+##### Schlüssel, Primärschlüssel
+
+* Normalerweise einen Integer.
+* **Primärschlüssel** wenn mehrere Schlüssel für ein Objekt existieren.
+
+##### Komplexität von Beziehungstypen
+
+* 1:1-Beziehung
+* n:1-Beziehung
+* n:m-Beziehung
+
+##### Schwache Entity-Typen
+
+> Es kommt vor, dass eine Entity nicht durch ihre eigenen Attribute allein identifiziert werden kann, sondern dass die eindeutige Identifizierung die Ausnutzung einer Beziehung erfordert. Ein Beispiel: Über die Kinder der Angestellten eines Unternehmens sollen die Attribute NAME und ALTER abgespeichert werden. Die Kinder sind eigene Entities, zur Identifizierung ist jedoch die Personalnummer des Vaters notwendig. Mit anderen Worten: die Identifizierung ist möglich über den Beziehungstyp VATER-VON, der den Entity-Typ ANGESTELLTE mit dem Entity-Typ KIND verbindet.
+
+##### Graphische Darstellung
+
+1. Rechtecke repräsentieren Entity-Typen.
+  ![Ein Entity mit Attribute](img/entity_diagram.png)  
+2. Rauten repräsentieren Beziehungstypen.
+  ![Zwei Entities mit eine 1:n-Beziehung](img/entities_und_beziehung.png)  
+3. Doppelt umrandete Rechtecke bezeichnen schwache Entity-Typen.
+  ![Schwache Entity Darstellung](img/schwache_entities.png)  
+
+##### Erweiterungen des ER-Modells
+
+* Das klassische ER-Modell kann einige Aspekte der Daten auf konzeptueller Ebene nur unvollkommen beschreiben.
+* z.B: Spezialisierung und Generaliserung
+
+###### Spezialisierung und Generalisierung (is-a relationship)
+
+![is-a Relationship](img/is-a_relationship.png)
+
+* **Vererbung:** Da jeder Angestellte (Freie Mitarbeiter) zugleich ein Mitarbeiter ist, hat er natürlich auch die Attribute des Mitarbeiters; wir sprechen von Vererbung der Attribute.
+* Das hier gewählte Beispiel ist eine **Partition**.
+> Falls wir beispielsweise die Angehörigen einer Universitätspezialisieren zu Mitarbeitern und Studierenden, so wäre diese Spezialisierung nicht *disjunkt*: ein Studierender kann zugleich studentische Hilfskraft sein, also auch Mitarbeiterstatus besitzen.
+> Die Partition unseres Beispiels ist *total*, es ist nämlich jeder Mitarbeiter entwederAngestellter oder Freier Mitarbeiter (andere Typen von Mitarbeitern gebe esnicht).
+
