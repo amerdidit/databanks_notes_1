@@ -286,4 +286,93 @@ Typische Tools sind
 * Das hier gewählte Beispiel ist eine **Partition**.
 > Falls wir beispielsweise die Angehörigen einer Universitätspezialisieren zu Mitarbeitern und Studierenden, so wäre diese Spezialisierung nicht *disjunkt*: ein Studierender kann zugleich studentische Hilfskraft sein, also auch Mitarbeiterstatus besitzen.
 > Die Partition unseres Beispiels ist *total*, es ist nämlich jeder Mitarbeiter entwederAngestellter oder Freier Mitarbeiter (andere Typen von Mitarbeitern gebe esnicht).
-
+
+## 3. Relationale Datenbanken
+### 3.1 Das relational Datenmodell
+
+* Meist verbreitete Datenmodel was von DBMS unterstützt wird.
+* Außerordentliche Einfache Struktur.
+* Hat eine komplette formale Basis. (im Gegensatz zu die andere praktische bedeutsame Modelle)
+* Entities und Realtionen werden als als Tabellen modelliert.
+* Definition einer Relation:
+> Sind $$$D_1, D_2, ..., D_n$$$ Mengen von Werten, so ist $$$R \times D_1 \times D_2 \times ... \times D_n$$$ eine n-stellige **Relation** über den Mengen (**domains**) undn ist der Grad (**degree**) der Relation.
+> Ein Element $$$r = (d_1, d_2, ..., dn) /times R (d_i /times D_i, i = 1, ..., n)$$$ ist ein **Tupel** der Relation $$$R$$$ (n-Tupel). di ist die i-te **Komponente** des Tupels.* **Relationenschema** $$$R(A_1, ..., A_n)$$$ spefiziert eine Relation mit Namen R und mit paarweise verschiedenen Attributen $$$A_1,...,A_n$$$.
+* $$$dom(A_i)$$$ ist der Wertebereich für das Attribut $$$A_i$$$
+* Jede Zeile der Tabelle entspricht ein Tupel.
+* Die Spalten der Tabelle werden entsprechend den Attributnamen benannt.
+* **Erse Normalform:**
+> Eine Relation bei der jedes Attribut elementar ist, ist in **der ersten Normalform(1NF)**. Sämtliche theoretischen Arbeiten über relationale Datenbankengehen von Relationen in 1. Normalform aus.
+* Die Gesamtheit der Relationenschemata einer Datenbank heißt **Schema der (relationalen)Datenbank**. Dazu gehören auch die Menge der **Integritätsbegingungen**
+#### Modelierung im relational Datenmodell
+* Es gibt keinen Unterschied zwischen Entities und Beziehungen zwischen Entities: beide werden durch Relationen ausgedrückt.
+![Relationale ERD](img/relationale_erd.png)
+* Die Entity-Typen ANGESTELLTER und PROJEKT können wir durch die Relationenschemata `ANGEST (ANGNR, NAME, WOHNORT, BERUF, GEHALT, ABTNR)` und `PROJEKT (PNAME, PNR, P_BESCHR, P_LEITER)` darstellen. Die m:n-Beziehung zwischen beiden stellen wir durch ein weiteres Relationenschema ANG_PRO dar: `ANG_PRO (PNR, ANGNR, PROZ_ARB)`.#### Schlüssel
+* Ein Schlüssel ist eine Attributenmenge womit ein Tupel identifiziert wird. 
+* **Minimalitätseigenschaft von Schlüsseln:** Ist X ein Schlüssel von R, so ist keine Teilmenge von X ebenfalls Schlüssel von R.
+
+### Grundlegende Sprachen Für relationale Datenbanken
+#### Einführung
+
+* Sprachen müssen es erlauben:
+    * gewünschte Relationen zu spezifizieren.
+    * Veränderungen von Relationen erlauben.
+    * Einführung/Löschen neuer/vorhandener Relationen erlauben.
+* Alle Sprachen können können folgendermassen unterteilt werden (oder sind eine mischung):
+    1. **Relationenalgebra**
+        > Spezifikation von gewünschten Relationen durch Angabe einer Folge von Operationen, mit der die Relationen aufgebaut werden sollen. Der Benutzer wendet spezielle Operationen auf Relationen an, um seine gewünschte Relation zu konstruieren.
+    2. **Relationenkalkül**
+        > Spezifikation von gewünschten Relationen in deskriptiver Weise, d. h. ohne Angabe, welche Operationen zum Aufbau der Relation verwendet werden sollen. Mit Hilfe des Prädikatenkalküls wird die Menge der gewünschten Tupel beschrieben: es wird ein Prädikat (eine Bedingung) angegeben, das die Tupel erfüllen müssen.
+* **Data-retrieval** ist der Kern jeder Datenmanipulationssprache.
+
+##### Relationenalgebra
+
+* **Algebra:** ein system, das aus einer nichtleeren Menge un einer Familie von Operationen auf dieser Menge besteht. 
+* **Relational vollständig** nur wenn diese Operationen verfügbar sind, kann man mit der relationalen Algebra dieselben abfragen ausdrücken wie mit dem Relationenkalkül. 
+
+NOTE: The definitions from the book are already so compressed, that I will just add images of them, instead of rewriting them.
+
+
+###### Vereinigung
+
+![Definition Vereinigung](img/definition_vereinigung.png)
+
+###### Differenz
+
+![Definition Differenz](img/definition_differenz.png)
+
+###### Kartesisches Produkt
+
+![Definition Kartesisches Produkt](img/definition_kartesisches_produkt.png)
+
+###### Projektion
+
+![Definition Projektion](img/definition_projektion.png)
+
+###### Selektion
+
+* Sei B eine Bedingung, wobei nur Attribute von R als freie Variablen vorkommen. Für ein Tupel $$$t \in R$$$ sei B(t) der (Wahrheits-)Wert von B, wenn für die Attribute in B die entsprechenden Attributwerte aus t eingesetzt werden. Dann heißt $$$S = σ_B (R)$$$ die Selektion auf R bzgl. der Selektionsbedingung B und ist folgendermaßen definiert:    * S hat das Schema $$$(R_1, ..., R_n)$$$.    * $$$s = (a_1, ..., a_n) \in S$$$, falls $$$s \in R$$$ und $$$B(s)$$$ gilt.
+
+###### Umbenennung
+
+![Definition Umbenennung](img/definition_umbenennung.png)
+
+###### Verbund/Join
+
+![Definition Verbund](img/definition_join1.png)
+![Definition Verbund](img/definition_join2.png)
+
+###### Natürlicher Verbung/Natural Join
+
+* Mit dem natürlichen Verbund werden diejenigen Tupel aus zwei Relationen so kombiniert, dass jeweils die Werte der Attribute gleichen Namens aus beiden Relationen übereinstimmen. Im Ergebnis sind diese Attribute nur einmal vorhanden.
+
+![Definition Natürlicher Verbund](img/definition_natural_join.png)
+
+##### Relationen Kalkül
+
+###### Vollständigkeit einer Abfragesprache
+
+###### Erweiterungen
+
+###### Update
+
+### SQL - eine relationale Abfragesprache
