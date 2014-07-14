@@ -369,10 +369,30 @@ NOTE: The definitions from the book are already so compressed, that I will just 
 
 ##### Relationen Kalkül
 
+* Der Relationenkalkül lässt sich unterteilen in den **Werte-orientierten Relationenkalkül** und den **Tupel-orientierten Relationenkalkül**.
+* **Werte-orientierten Relationenkalkül**
+    * Variablen bezeichnen einzelne Komponenten eines Tupels.
+* **Tupel-orientierten Relationenkalkül**
+    * Variablen bezeichnen ganze Tupel.
+* Der Relationenkalkül ist nichts anderes als eine formale Sprache zur Definition einer neuen Relation in den Begriffen schon gegebener Relationen.
+
+        FINDE DIE WOHNORTE ALLER ANGESTELLTEN,        DIE PROGRAMMIERER SIND
+wird 
+        {(ANGEST.WOHNORT) | ANGEST.BERUF = 'PROGRAMMIERER'}
+* Ein Ausdruck im Relationenkalkül hat also die Form {t | q}, wobei t eine Liste von Attributnamen (Schema der gewünschten Relation) und q ein Prädikat (Qua-lifikationsteil, der die gewünschten Tupel für t spezifiziert) ist.
+> Das **Prädikat** q ist ein logischer Ausdruck von beliebiger Komplexität, der in üblicher Weise aufgebaut ist aus Attributnamen, Konstanten, Vergleichsoperatoren $$$('=', '\neq', '>', ...)$$$, Booleschen Operatoren $$$('\vee', '\wedge' bzw. AND, OR, NOT)$$$, Exis-tenzquantoren $$$'\exists'$$$ („es existiert“), Allquantoren $$$'\forall'$$$ („für alle“) und Tupelvariablen.   
+> Eine **Tupelvariable** ist in einem Ausdruck **gebunden**, wenn sie durch einen $$$'\exists'$$$ oder $$$'\forall'$$$ Quantor eingeführt wird, ansonsten ist sie **frei**.
 ###### Vollständigkeit einer Abfragesprache
+
+> Man bezeichnet eine Abfragesprache als **relational vollständig** (complete), wenn mit ihr alles ausgedrückt werden kann, was im Relationenkalkül ausgedrückt werden kann.
 
 ###### Erweiterungen
 
+>Für die praktische Anwendung sind Sprachmöglichkeiten wichtig, die im „reinen“ Kalkül und in der „reinen“ Algebra nicht vorhanden sind. Hierzu gehören Mög-lichkeiten zur sortierten Ausgabe, arithmetische Operationen etwa bei Verglei-chen (A < B + 10) und vor allem Aggregierungsfunktionen wie Zahl der Tupel einer Relation, Durchschnitt, Summe, Maximalwert, Minimalwert, usw. Diese Funktionen sind wichtig, um Abfragen der Art
+        WIEVIELE ANGESTELLTE MIT EINER BESTIMMTEN EIGENSCHAFT GIBT ES?formulieren zu können. Derartige Erweiterungen werden
+
 ###### Update
+
+blablabla need to update.
 
 ### SQL - eine relationale Abfragesprache
