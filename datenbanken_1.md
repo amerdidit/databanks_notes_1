@@ -310,7 +310,7 @@ Typische Tools sind
 * Ein Schlüssel ist eine Attributenmenge womit ein Tupel identifiziert wird. 
 * **Minimalitätseigenschaft von Schlüsseln:** Ist X ein Schlüssel von R, so ist keine Teilmenge von X ebenfalls Schlüssel von R.
 
-### Grundlegende Sprachen Für relationale Datenbanken
+### 3.2 Grundlegende Sprachen Für relationale Datenbanken
 #### Einführung
 
 * Sprachen müssen es erlauben:
@@ -395,4 +395,64 @@ NOTE: The definitions from the book are already so compressed, that I will just 
 
 blablabla need to update.
 
-### SQL - eine relationale Abfragesprache
+### 3.3 SQL - eine relationale Abfragesprache
+
+* Am weitesten Verbreitet.
+* **SEQUEL:** **S**tructured **E**nglish **QUE**ry **L**anguage
+
+
+ Relationales Modell | SQL | SQL English |
+ --- | --- | ---
+ Relation | Tabelle | Table |
+ Attribut | Spalte | Column |
+
+* Ergänzungen gegenüber dem vorgestellten Realtionen modell:
+    * Aggregierungsfunktionen,
+    * NULL-Werte
+    
+#### Die SELECT-Anweisung
+
+    SELECT $$$A_1, ..., A_n$$$    FROM $$$R_1, ..., R_n$$$    WHERE Prädikat($$$R_1, ..., R_n$$$)
+kann mann folgendermassen übersetzen:
+> Selektiere aus dem Kreuzprodukt der Relationen $$$R_1, ..., R_n$$$ alle Tupel, die die Bedingung Prädikat($$$R_1, ..., R_n$$$) erfüllen, und projiziere die so entstehende Relation auf die Attribute $$$A_1, ..., A_n$$$.
+* **Duplikate in SQL:** `DISTINCT` muss benutzt werden. > *Der Grund hierfür liegt darin, dass es zusätz-lichen Rechenaufwand kostet, aus jeder Ergebnistabelle Duplikate zu eliminieren, während viele praktische Anwendungen (insbesondere aber auch die Berechnung von Zwischenergebnissen) diese Anforderung gar nicht stellen.** **Tupel-variablen** (*Correlation Names*) (using `AS` which is optional btw)> Tupelvariablen sind immer dann erforderlich, wenn der JOIN einer Tabelle mit sich selbst gebildet werden soll.
+* **LEFT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die links (vom Schlüsselbe-griff OUTER JOIN) steht.* **RIGHT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die rechts steht.* **FULL OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabellen erhalten, die links und rechts stehen.##### Nachteile von OUTER JOINS
+* **Syntax:** in vielen Systemen nicht Standardkonform
+* **Null-werte** 
+    * **NOT NULL** Outer Joins setzen sich über NOT NULL-Constraints hinweg -> ein Attribut, das Sie als `NOT NULL` definiert haben kann in einem Outer Join durchaus `NULL` werden.
+    * **NULL** Es ist nicht möglich zu erkennen, ob ein NULL-Wert in der ursprünglichen Tabelle schon vorhanden war, oder ob er durch den Outer Join eingefügt wurde.
+* **Performance** immer langsamer als Inner Joins 
+* **Verkettung und kognitive Überlastung** fucking difficult man to know what you want and what to expect! fuckity fuck fuck fuck. 
+
+
+##### `WHERE`-Klausel
+
+* *Standard-Satz an logische und Vergleichsopeatoren:* `AND OR NOT = != < > ...`
+* `SUBSTRING LIKE BETWEEN ...`
+* `+ - * / ...`
+* `IN` Prädikat
+
+##### Geschachtelte Abfragen
+
+* **Äußere Abfrage**
+* **innere Abfrage** aka *SUBQUERY* aka *SUBSELECT*
+* **Korrelierten Subqueries**: subqueries die tebelen/spalten aus die äussere Queries referenieren. z.B in der `WHERE` Klausel.
+
+##### `EXISTS` Prädikat
+
+* Checks if the result contains any values at all.
+
+#####  SQL functions
+
+* `SUM`
+* `AVG`
+* `COUNT`
+* `MAX`
+* `MIN`
+* `EVERY` : returns `false` if any of the results returns `false`
+* `ANY`, `SOME` returns `true` if any of the results returns `true`
+* `GROUP BY`
+* `HAVING` -> kind of like `WHERE` after using `GROUP BY`
+
+
+#### `INSERT`, `UPDATE` und `DELETE`
