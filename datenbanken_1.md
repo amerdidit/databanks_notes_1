@@ -410,13 +410,15 @@ blablabla need to update.
     * Aggregierungsfunktionen,
     * NULL-Werte
     
-#### Die SELECT-Anweisung
+#### 3.3.1 Grundlegende Sprachelemente von SQL
+
+##### Die SELECT-Anweisung
 
     SELECT $$$A_1, ..., A_n$$$    FROM $$$R_1, ..., R_n$$$    WHERE Prädikat($$$R_1, ..., R_n$$$)
 kann mann folgendermassen übersetzen:
 > Selektiere aus dem Kreuzprodukt der Relationen $$$R_1, ..., R_n$$$ alle Tupel, die die Bedingung Prädikat($$$R_1, ..., R_n$$$) erfüllen, und projiziere die so entstehende Relation auf die Attribute $$$A_1, ..., A_n$$$.
 * **Duplikate in SQL:** `DISTINCT` muss benutzt werden. > *Der Grund hierfür liegt darin, dass es zusätz-lichen Rechenaufwand kostet, aus jeder Ergebnistabelle Duplikate zu eliminieren, während viele praktische Anwendungen (insbesondere aber auch die Berechnung von Zwischenergebnissen) diese Anforderung gar nicht stellen.** **Tupel-variablen** (*Correlation Names*) (using `AS` which is optional btw)> Tupelvariablen sind immer dann erforderlich, wenn der JOIN einer Tabelle mit sich selbst gebildet werden soll.
-* **LEFT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die links (vom Schlüsselbe-griff OUTER JOIN) steht.* **RIGHT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die rechts steht.* **FULL OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabellen erhalten, die links und rechts stehen.##### Nachteile von OUTER JOINS
+* **LEFT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die links (vom Schlüsselbe-griff OUTER JOIN) steht.* **RIGHT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die rechts steht.* **FULL OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabellen erhalten, die links und rechts stehen.###### Nachteile von OUTER JOINS
 * **Syntax:** in vielen Systemen nicht Standardkonform
 * **Null-werte** 
     * **NOT NULL** Outer Joins setzen sich über NOT NULL-Constraints hinweg -> ein Attribut, das Sie als `NOT NULL` definiert haben kann in einem Outer Join durchaus `NULL` werden.
@@ -425,7 +427,7 @@ blablabla need to update.
 * **Verkettung und kognitive Überlastung** fucking difficult man to know what you want and what to expect! fuckity fuck fuck fuck. 
 
 
-##### `WHERE`-Klausel
+###### `WHERE`-Klausel
 
 * *Standard-Satz an logische und Vergleichsopeatoren:* `AND OR NOT = != < > ...`
 * `SUBSTRING LIKE BETWEEN ...`
@@ -438,11 +440,11 @@ blablabla need to update.
 * **innere Abfrage** aka *SUBQUERY* aka *SUBSELECT*
 * **Korrelierten Subqueries**: subqueries die tebelen/spalten aus die äussere Queries referenieren. z.B in der `WHERE` Klausel.
 
-##### `EXISTS` Prädikat
+###### `EXISTS` Prädikat
 
 * Checks if the result contains any values at all.
 
-#####  SQL functions
+######  SQL functions
 
 * `SUM`
 * `AVG`
@@ -455,4 +457,64 @@ blablabla need to update.
 * `HAVING` -> kind of like `WHERE` after using `GROUP BY`
 
 
-#### `INSERT`, `UPDATE` und `DELETE`
+##### `INSERT`, `UPDATE` und `DELETE`
+
+###### `INSERT`
+
+````SQL
+-- FÜGE EINEN NEUEN ANGESTELLTEN ´MEIER´ EIN
+-- lautet in SQL
+-- 
+    INSERT INTO ANGEST    VALUES ( 128, ´MEIER´, ´HAGEN´, ´INGENIEUR´, 5400 , 3 ) 
+-- reihenfolde der values, muss mit der definition der Tabele übereinstimmen.-- -- Oder, besser ausgedrückt:
+--     INSERT INTO ANGEST             (ANGNR, NAME, WOHNORT, BERUF, GEHALT, ABTNR)     VALUES  ( 128, ´MEIER´, ´HAGEN´, ´INGENIEUR´, 5400 , 3 )
+````###### `UPDATE`
+````SQL
+-- ERHÖHE DAS GEHALT DER MITARBEITER AM PROJEKT NUMMER 17 ABHÄNGIG VON DER BETEILIGUNG UM 10 %
+-- lautet in SQL
+    UPDATE ANGEST SET 
+    GEHALT = GEHALT + GEHALT * 0.1 * 
+            (SELECT PROZ_ARB 
+             FROM ANG_PRO 
+             WHERE ANG_PRO.ANGNR=ANGEST.ANGNR
+             AND ANG_PRO.PROJEKT = 17) /100 
+    WHERE ANGNR IN (SELECT ANGNR 
+                    FROM ANGPRO 
+                    WHERE PNR = 17)````
+###### `DELETE`
+````SQL
+-- DER ANGESTELLTE 'MÜLLER' ARBEITET NICHT MEHR AN DEM PROJEKT NUMMER 10 MIT--  lautet in SQL:    DELETE FROM ANG_PRO    WHERE PNR=10 AND         ANGNR = (SELECT ANGNR                 FROM ANGEST                 WHERE NAME = 'MÜLLER')````
+
+##### Schemamanipulation
+
+###### `CREATE TABLE`
+
+````SQL
+CREATE TABLE ANG_PRO(PNR     INTEGER,ANGNR    INTEGER,PROZ_ARB INTEGER,CONSTRAINT ANG_PRO_PK PRIMARY KEY (PNR, ANGNR),CONSTRAINT ANG_PRO_ANGNR_FK FOREIGN KEY (ANGNR) REFERENCES ANGEST(ANGNR),CONSTRAINT ANG_PRO_PROJEKT_FK FOREIGN KEY (PNR) REFERENCES PROJEKT(PNR))
+````
+
+* *Referentielle Integrität:* Es kann in `ANG_PRO` kein Angestellter aufgeführt werden, der nicht tatsächlich in `ANGEST` existiert.
+* Schlüsselwor `CONSTRAINT` ist optional.
+
+###### `DROP TABLE`
+
+`DROP TABLE ANG_PRO`
+
+##### Sichten (Views)
+
+* **Base Tables** *Basistabellen* 
+* Die Sichten in SQL stellen für den Anwender wiederum Tabellen dar.
+
+###### `CREATE VIEW`
+
+````SQL
+CREATE     VIEW ZAHL_DER_ANGEST (ABTNR, ANZAHL) AS            SELECT     ABTNR, COUNT (ANGNR)            FROM       ANGEST            GROUP BY   ABTNR
+````
+* Sichten stellen *abgeleitete Tabellen* (im Standard **derived tables**) dar.
+* Sichten werden dynamisch erzeugt, sie existieren nur durch ihre Definition.
+
+###### `VIEW-UPDATES` 
+
+* Können nur erlaubt werden wenn die Grundelegen die Basistupel ansprechen. 
+
+#### 3.3.2
