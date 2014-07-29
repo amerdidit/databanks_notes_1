@@ -286,4 +286,289 @@ Typische Tools sind
 * Das hier gewählte Beispiel ist eine **Partition**.
 > Falls wir beispielsweise die Angehörigen einer Universitätspezialisieren zu Mitarbeitern und Studierenden, so wäre diese Spezialisierung nicht *disjunkt*: ein Studierender kann zugleich studentische Hilfskraft sein, also auch Mitarbeiterstatus besitzen.
 > Die Partition unseres Beispiels ist *total*, es ist nämlich jeder Mitarbeiter entwederAngestellter oder Freier Mitarbeiter (andere Typen von Mitarbeitern gebe esnicht).
-
+
+## 3. Relationale Datenbanken
+### 3.1 Das relational Datenmodell
+
+* Meist verbreitete Datenmodel was von DBMS unterstützt wird.
+* Außerordentliche Einfache Struktur.
+* Hat eine komplette formale Basis. (im Gegensatz zu die andere praktische bedeutsame Modelle)
+* Entities und Realtionen werden als als Tabellen modelliert.
+* Definition einer Relation:
+> Sind $$$D_1, D_2, ..., D_n$$$ Mengen von Werten, so ist $$$R \times D_1 \times D_2 \times ... \times D_n$$$ eine n-stellige **Relation** über den Mengen (**domains**) undn ist der Grad (**degree**) der Relation.
+> Ein Element $$$r = (d_1, d_2, ..., dn) /times R (d_i /times D_i, i = 1, ..., n)$$$ ist ein **Tupel** der Relation $$$R$$$ (n-Tupel). di ist die i-te **Komponente** des Tupels.* **Relationenschema** $$$R(A_1, ..., A_n)$$$ spefiziert eine Relation mit Namen R und mit paarweise verschiedenen Attributen $$$A_1,...,A_n$$$.
+* $$$dom(A_i)$$$ ist der Wertebereich für das Attribut $$$A_i$$$
+* Jede Zeile der Tabelle entspricht ein Tupel.
+* Die Spalten der Tabelle werden entsprechend den Attributnamen benannt.
+* **Erse Normalform:**
+> Eine Relation bei der jedes Attribut elementar ist, ist in **der ersten Normalform(1NF)**. Sämtliche theoretischen Arbeiten über relationale Datenbankengehen von Relationen in 1. Normalform aus.
+* Die Gesamtheit der Relationenschemata einer Datenbank heißt **Schema der (relationalen)Datenbank**. Dazu gehören auch die Menge der **Integritätsbegingungen**
+#### Modelierung im relational Datenmodell
+* Es gibt keinen Unterschied zwischen Entities und Beziehungen zwischen Entities: beide werden durch Relationen ausgedrückt.
+![Relationale ERD](img/relationale_erd.png)
+* Die Entity-Typen ANGESTELLTER und PROJEKT können wir durch die Relationenschemata `ANGEST (ANGNR, NAME, WOHNORT, BERUF, GEHALT, ABTNR)` und `PROJEKT (PNAME, PNR, P_BESCHR, P_LEITER)` darstellen. Die m:n-Beziehung zwischen beiden stellen wir durch ein weiteres Relationenschema ANG_PRO dar: `ANG_PRO (PNR, ANGNR, PROZ_ARB)`.#### Schlüssel
+* Ein Schlüssel ist eine Attributenmenge womit ein Tupel identifiziert wird. 
+* **Minimalitätseigenschaft von Schlüsseln:** Ist X ein Schlüssel von R, so ist keine Teilmenge von X ebenfalls Schlüssel von R.
+
+### 3.2 Grundlegende Sprachen Für relationale Datenbanken
+#### Einführung
+
+* Sprachen müssen es erlauben:
+    * gewünschte Relationen zu spezifizieren.
+    * Veränderungen von Relationen erlauben.
+    * Einführung/Löschen neuer/vorhandener Relationen erlauben.
+* Alle Sprachen können können folgendermassen unterteilt werden (oder sind eine mischung):
+    1. **Relationenalgebra**
+        > Spezifikation von gewünschten Relationen durch Angabe einer Folge von Operationen, mit der die Relationen aufgebaut werden sollen. Der Benutzer wendet spezielle Operationen auf Relationen an, um seine gewünschte Relation zu konstruieren.
+    2. **Relationenkalkül**
+        > Spezifikation von gewünschten Relationen in deskriptiver Weise, d. h. ohne Angabe, welche Operationen zum Aufbau der Relation verwendet werden sollen. Mit Hilfe des Prädikatenkalküls wird die Menge der gewünschten Tupel beschrieben: es wird ein Prädikat (eine Bedingung) angegeben, das die Tupel erfüllen müssen.
+* **Data-retrieval** ist der Kern jeder Datenmanipulationssprache.
+
+##### Relationenalgebra
+
+* **Algebra:** ein system, das aus einer nichtleeren Menge un einer Familie von Operationen auf dieser Menge besteht. 
+* **Relational vollständig** nur wenn diese Operationen verfügbar sind, kann man mit der relationalen Algebra dieselben abfragen ausdrücken wie mit dem Relationenkalkül. 
+
+NOTE: The definitions from the book are already so compressed, that I will just add images of them, instead of rewriting them.
+
+
+###### Vereinigung
+
+![Definition Vereinigung](img/definition_vereinigung.png)
+
+###### Differenz
+
+![Definition Differenz](img/definition_differenz.png)
+
+###### Kartesisches Produkt
+
+![Definition Kartesisches Produkt](img/definition_kartesisches_produkt.png)
+
+###### Projektion
+
+![Definition Projektion](img/definition_projektion.png)
+
+###### Selektion
+
+* Sei B eine Bedingung, wobei nur Attribute von R als freie Variablen vorkommen. Für ein Tupel $$$t \in R$$$ sei B(t) der (Wahrheits-)Wert von B, wenn für die Attribute in B die entsprechenden Attributwerte aus t eingesetzt werden. Dann heißt $$$S = σ_B (R)$$$ die Selektion auf R bzgl. der Selektionsbedingung B und ist folgendermaßen definiert:    * S hat das Schema $$$(R_1, ..., R_n)$$$.    * $$$s = (a_1, ..., a_n) \in S$$$, falls $$$s \in R$$$ und $$$B(s)$$$ gilt.
+
+###### Umbenennung
+
+![Definition Umbenennung](img/definition_umbenennung.png)
+
+###### Verbund/Join
+
+![Definition Verbund](img/definition_join1.png)
+![Definition Verbund](img/definition_join2.png)
+
+###### Natürlicher Verbung/Natural Join
+
+* Mit dem natürlichen Verbund werden diejenigen Tupel aus zwei Relationen so kombiniert, dass jeweils die Werte der Attribute gleichen Namens aus beiden Relationen übereinstimmen. Im Ergebnis sind diese Attribute nur einmal vorhanden.
+
+![Definition Natürlicher Verbund](img/definition_natural_join.png)
+
+##### Relationen Kalkül
+
+* Der Relationenkalkül lässt sich unterteilen in den **Werte-orientierten Relationenkalkül** und den **Tupel-orientierten Relationenkalkül**.
+* **Werte-orientierten Relationenkalkül**
+    * Variablen bezeichnen einzelne Komponenten eines Tupels.
+* **Tupel-orientierten Relationenkalkül**
+    * Variablen bezeichnen ganze Tupel.
+* Der Relationenkalkül ist nichts anderes als eine formale Sprache zur Definition einer neuen Relation in den Begriffen schon gegebener Relationen.
+
+        FINDE DIE WOHNORTE ALLER ANGESTELLTEN,        DIE PROGRAMMIERER SIND
+wird 
+        {(ANGEST.WOHNORT) | ANGEST.BERUF = 'PROGRAMMIERER'}
+* Ein Ausdruck im Relationenkalkül hat also die Form {t | q}, wobei t eine Liste von Attributnamen (Schema der gewünschten Relation) und q ein Prädikat (Qua-lifikationsteil, der die gewünschten Tupel für t spezifiziert) ist.
+> Das **Prädikat** q ist ein logischer Ausdruck von beliebiger Komplexität, der in üblicher Weise aufgebaut ist aus Attributnamen, Konstanten, Vergleichsoperatoren $$$('=', '\neq', '>', ...)$$$, Booleschen Operatoren $$$('\vee', '\wedge' bzw. AND, OR, NOT)$$$, Exis-tenzquantoren $$$'\exists'$$$ („es existiert“), Allquantoren $$$'\forall'$$$ („für alle“) und Tupelvariablen.   
+> Eine **Tupelvariable** ist in einem Ausdruck **gebunden**, wenn sie durch einen $$$'\exists'$$$ oder $$$'\forall'$$$ Quantor eingeführt wird, ansonsten ist sie **frei**.
+###### Vollständigkeit einer Abfragesprache
+
+> Man bezeichnet eine Abfragesprache als **relational vollständig** (complete), wenn mit ihr alles ausgedrückt werden kann, was im Relationenkalkül ausgedrückt werden kann.
+
+###### Erweiterungen
+
+>Für die praktische Anwendung sind Sprachmöglichkeiten wichtig, die im „reinen“ Kalkül und in der „reinen“ Algebra nicht vorhanden sind. Hierzu gehören Mög-lichkeiten zur sortierten Ausgabe, arithmetische Operationen etwa bei Verglei-chen (A < B + 10) und vor allem Aggregierungsfunktionen wie Zahl der Tupel einer Relation, Durchschnitt, Summe, Maximalwert, Minimalwert, usw. Diese Funktionen sind wichtig, um Abfragen der Art
+        WIEVIELE ANGESTELLTE MIT EINER BESTIMMTEN EIGENSCHAFT GIBT ES?formulieren zu können. Derartige Erweiterungen werden
+
+###### Update
+
+blablabla need to update.
+
+### 3.3 SQL - eine relationale Abfragesprache
+
+* Am weitesten Verbreitet.
+* **SEQUEL:** **S**tructured **E**nglish **QUE**ry **L**anguage
+
+
+ Relationales Modell | SQL | SQL English |
+ --- | --- | ---
+ Relation | Tabelle | Table |
+ Attribut | Spalte | Column |
+
+* Ergänzungen gegenüber dem vorgestellten Realtionen modell:
+    * Aggregierungsfunktionen,
+    * NULL-Werte
+    
+#### 3.3.1 Grundlegende Sprachelemente von SQL
+
+##### Die SELECT-Anweisung
+
+    SELECT $$$A_1, ..., A_n$$$    FROM $$$R_1, ..., R_n$$$    WHERE Prädikat($$$R_1, ..., R_n$$$)
+kann mann folgendermassen übersetzen:
+> Selektiere aus dem Kreuzprodukt der Relationen $$$R_1, ..., R_n$$$ alle Tupel, die die Bedingung Prädikat($$$R_1, ..., R_n$$$) erfüllen, und projiziere die so entstehende Relation auf die Attribute $$$A_1, ..., A_n$$$.
+* **Duplikate in SQL:** `DISTINCT` muss benutzt werden. > *Der Grund hierfür liegt darin, dass es zusätz-lichen Rechenaufwand kostet, aus jeder Ergebnistabelle Duplikate zu eliminieren, während viele praktische Anwendungen (insbesondere aber auch die Berechnung von Zwischenergebnissen) diese Anforderung gar nicht stellen.** **Tupel-variablen** (*Correlation Names*) (using `AS` which is optional btw)> Tupelvariablen sind immer dann erforderlich, wenn der JOIN einer Tabelle mit sich selbst gebildet werden soll.
+* **LEFT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die links (vom Schlüsselbe-griff OUTER JOIN) steht.* **RIGHT OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabelle erhalten, die rechts steht.* **FULL OUTER JOIN:** Es bleiben die nicht der JOIN-Bedingung ent-sprechenden Zeilen der Tabellen erhalten, die links und rechts stehen.###### Nachteile von OUTER JOINS
+* **Syntax:** in vielen Systemen nicht Standardkonform
+* **Null-werte** 
+    * **NOT NULL** Outer Joins setzen sich über NOT NULL-Constraints hinweg -> ein Attribut, das Sie als `NOT NULL` definiert haben kann in einem Outer Join durchaus `NULL` werden.
+    * **NULL** Es ist nicht möglich zu erkennen, ob ein NULL-Wert in der ursprünglichen Tabelle schon vorhanden war, oder ob er durch den Outer Join eingefügt wurde.
+* **Performance** immer langsamer als Inner Joins 
+* **Verkettung und kognitive Überlastung** fucking difficult man to know what you want and what to expect! fuckity fuck fuck fuck. 
+
+
+###### `WHERE`-Klausel
+
+* *Standard-Satz an logische und Vergleichsopeatoren:* `AND OR NOT = != < > ...`
+* `SUBSTRING LIKE BETWEEN ...`
+* `+ - * / ...`
+* `IN` Prädikat
+
+##### Geschachtelte Abfragen
+
+* **Äußere Abfrage**
+* **innere Abfrage** aka *SUBQUERY* aka *SUBSELECT*
+* **Korrelierten Subqueries**: subqueries die tebelen/spalten aus die äussere Queries referenieren. z.B in der `WHERE` Klausel.
+
+###### `EXISTS` Prädikat
+
+* Checks if the result contains any values at all.
+
+######  SQL functions
+
+* `SUM`
+* `AVG`
+* `COUNT`
+* `MAX`
+* `MIN`
+* `EVERY` : returns `false` if any of the results returns `false`
+* `ANY`, `SOME` returns `true` if any of the results returns `true`
+* `GROUP BY`
+* `HAVING` -> kind of like `WHERE` after using `GROUP BY`
+
+
+##### `INSERT`, `UPDATE` und `DELETE`
+
+###### `INSERT`
+
+````SQL
+-- FÜGE EINEN NEUEN ANGESTELLTEN ´MEIER´ EIN
+-- lautet in SQL
+-- 
+    INSERT INTO ANGEST    VALUES ( 128, ´MEIER´, ´HAGEN´, ´INGENIEUR´, 5400 , 3 ) 
+-- reihenfolde der values, muss mit der definition der Tabele übereinstimmen.-- -- Oder, besser ausgedrückt:
+--     INSERT INTO ANGEST             (ANGNR, NAME, WOHNORT, BERUF, GEHALT, ABTNR)     VALUES  ( 128, ´MEIER´, ´HAGEN´, ´INGENIEUR´, 5400 , 3 )
+````###### `UPDATE`
+````SQL
+-- ERHÖHE DAS GEHALT DER MITARBEITER AM PROJEKT NUMMER 17 ABHÄNGIG VON DER BETEILIGUNG UM 10 %
+-- lautet in SQL
+    UPDATE ANGEST SET 
+    GEHALT = GEHALT + GEHALT * 0.1 * 
+            (SELECT PROZ_ARB 
+             FROM ANG_PRO 
+             WHERE ANG_PRO.ANGNR=ANGEST.ANGNR
+             AND ANG_PRO.PROJEKT = 17) /100 
+    WHERE ANGNR IN (SELECT ANGNR 
+                    FROM ANGPRO 
+                    WHERE PNR = 17)````
+###### `DELETE`
+````SQL
+-- DER ANGESTELLTE 'MÜLLER' ARBEITET NICHT MEHR AN DEM PROJEKT NUMMER 10 MIT--  lautet in SQL:    DELETE FROM ANG_PRO    WHERE PNR=10 AND         ANGNR = (SELECT ANGNR                 FROM ANGEST                 WHERE NAME = 'MÜLLER')````
+
+##### Schemamanipulation
+
+###### `CREATE TABLE`
+
+````SQL
+CREATE TABLE ANG_PRO(PNR     INTEGER,ANGNR    INTEGER,PROZ_ARB INTEGER,CONSTRAINT ANG_PRO_PK PRIMARY KEY (PNR, ANGNR),CONSTRAINT ANG_PRO_ANGNR_FK FOREIGN KEY (ANGNR) REFERENCES ANGEST(ANGNR),CONSTRAINT ANG_PRO_PROJEKT_FK FOREIGN KEY (PNR) REFERENCES PROJEKT(PNR))
+````
+
+* *Referentielle Integrität:* Es kann in `ANG_PRO` kein Angestellter aufgeführt werden, der nicht tatsächlich in `ANGEST` existiert.
+* Schlüsselwor `CONSTRAINT` ist optional.
+
+###### `DROP TABLE`
+
+`DROP TABLE ANG_PRO`
+
+##### Sichten (Views)
+
+* **Base Tables** *Basistabellen* 
+* Die Sichten in SQL stellen für den Anwender wiederum Tabellen dar.
+
+###### `CREATE VIEW`
+
+````SQL
+CREATE     VIEW ZAHL_DER_ANGEST (ABTNR, ANZAHL) AS            SELECT     ABTNR, COUNT (ANGNR)            FROM       ANGEST            GROUP BY   ABTNR
+````
+* Sichten stellen *abgeleitete Tabellen* (im Standard **derived tables**) dar.
+* Sichten werden dynamisch erzeugt, sie existieren nur durch ihre Definition.
+
+###### `VIEW-UPDATES` 
+
+* Können nur erlaubt werden wenn die Grundelegen die Basistupel ansprechen. 
+
+#### 3.3.2 Konsistenz, Transaktionen und Recovery
+
+* **Transaktionskonzept:** Das zentrale Konzept zur Sicherung der Korrektheit der Parallelen benutzung der datenbank.
+* **Recovery:** Wiederherstellung.
+
+##### Konsistenz und Fehlerursachen
+
+* Beispiele von Inkonsistenz:  * Referenz ins Leere (jemand löscht ein Tupel, ohne dass die darauf verweisen-den Referenzen korrigiert werden)  * Eine Buchung X ist vom Konto A abgebucht, aber nicht dem Zielkonto B gutgeschrieben  * Ein Summenfeld gibt nicht die korrekte Summe der Einzelelemente (z.B. Ge-haltssumme)  * Ein negatives Alter  * Bei Mehrfachspeicherung derselben Daten in versc  hiedenen Sätzen: Ände-rung ist an einer Stelle erfolgt, nicht an der anderen.
+* Konsistenzverletzungen können verschiedene Ursachen haben, beispielsweise:  1. Falsche Eingabedaten  2. Fehler im Anwendungsprogramm (falsche Programmierung, etwa im Fall b oder d)  3. Falsche Behandlung paralleler Anwendungsabläufe  4. Abstürze des Betriebssystems oder des DBMS  5. Ausfälle von Massenspeichern  6. Falsche Schemadefinitionen (z.B. ein den Daten nicht angemessener Daten-typ
+* Mann kann **Integritätsbedingungen** definieren.
+* **Transaktionsmanagement:** parallelen Abläufe werden so organisiert, dass sie nicht zu Inkonsistenzen führen können.
+
+##### Transaktion 
+
+* Eine **Transaktion** ist also eine Folge von Befehlen, die entweder vollständig und korrekt ausgeführt wird oder überhaupt nicht.
+* Der **Recovery-Manager** legt Sicherungsko-pien von Datenbeständen an und protokolliert Transaktionen in sog. Logfiles mit, so dass  * Ergebnisse abgeschlossener Transaktionen nach Fehlern wieder in die Daten-bank eingespielt werden können,  * Änderungen in der Datenbank, die durch nicht abgeschlossene Transaktionen bewirkt wurden, rückgängig gemacht werden können,  * Im Falle von Speicherfehlern (Platten) der jüngste konsistente Zustand der Datenbank wiederhergestellt werden kann.
+* **ACID:** *Atomicity, consistency, isolation, durability*
+  * **Unteilbarkeit** *(atomicity)*
+    > Eine Transaktion ist eine unteilbare Verarbeitungseinheit; sie wird entweder ganz oder überhaupt nicht ausgeführt.
+  * **Konsistenz** *(consistency)*
+    > Eine korrekte Ausführung der Transaktion führt die DB von einem konsistenten zu einem konsistenten Zustand.
+  * **Isolation** *(isolation)*
+    > Eine Transaktion muss so ablaufen, als sei sie die einzige im System. Zwischenzustände (die ja inkonsistent sein können) dürfen für andere Transaktionen nicht sichtbar sein.
+  * **Dauerhaftigkeit** *(durability)*
+    > Ergebnisse einer erfolgreich beendeten Transaktion sind dauerhaft, d.h. überleben jeden nachfolgenden Fehler.
+    
+##### Beginn und Ende von Transaktionen
+
+* Folgende Statements started eine Transaktion:
+  * SQL-Schema Statements:
+    * `ALTER`
+    * `CREATE`
+    * `DROP`
+    * `GRANT`
+    * `REVOKE`
+  * SQL-Daten Statements
+    * `OPEN`  
+    * `CLOSE`
+    * `FETCH`
+    * `INSERT`
+    * `UPDATE`
+    * `DELETE`
+    * `FREE LOCATOR`
+    * `HOLD LOCATOR`
+  * Transaktions-Statements
+    * `START STATEMENT`
+    * `COMMIT AND CHAIN`
+    * `ROLLBACK AND CHAIN`
+  * SQL-Kontroll Statement
+    * `RETURN`
+
+#### 3.3.3 Kopplung von SQL an eine Programmiersprache
+
+* **Embeded SQL** hat sich als die Kopplungsart durchgesetzt.
+    * Ein *precompiler* übersetzt den SQL in die Wirtsprache erst, vor das Program kompiliert wird.
