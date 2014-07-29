@@ -517,4 +517,58 @@ CREATE     VIEW ZAHL_DER_ANGEST (ABTNR, ANZAHL) AS            SELECT     ABTNR,
 
 * Können nur erlaubt werden wenn die Grundelegen die Basistupel ansprechen. 
 
-#### 3.3.2
+#### 3.3.2 Konsistenz, Transaktionen und Recovery
+
+* **Transaktionskonzept:** Das zentrale Konzept zur Sicherung der Korrektheit der Parallelen benutzung der datenbank.
+* **Recovery:** Wiederherstellung.
+
+##### Konsistenz und Fehlerursachen
+
+* Beispiele von Inkonsistenz:  * Referenz ins Leere (jemand löscht ein Tupel, ohne dass die darauf verweisen-den Referenzen korrigiert werden)  * Eine Buchung X ist vom Konto A abgebucht, aber nicht dem Zielkonto B gutgeschrieben  * Ein Summenfeld gibt nicht die korrekte Summe der Einzelelemente (z.B. Ge-haltssumme)  * Ein negatives Alter  * Bei Mehrfachspeicherung derselben Daten in versc  hiedenen Sätzen: Ände-rung ist an einer Stelle erfolgt, nicht an der anderen.
+* Konsistenzverletzungen können verschiedene Ursachen haben, beispielsweise:  1. Falsche Eingabedaten  2. Fehler im Anwendungsprogramm (falsche Programmierung, etwa im Fall b oder d)  3. Falsche Behandlung paralleler Anwendungsabläufe  4. Abstürze des Betriebssystems oder des DBMS  5. Ausfälle von Massenspeichern  6. Falsche Schemadefinitionen (z.B. ein den Daten nicht angemessener Daten-typ
+* Mann kann **Integritätsbedingungen** definieren.
+* **Transaktionsmanagement:** parallelen Abläufe werden so organisiert, dass sie nicht zu Inkonsistenzen führen können.
+
+##### Transaktion 
+
+* Eine **Transaktion** ist also eine Folge von Befehlen, die entweder vollständig und korrekt ausgeführt wird oder überhaupt nicht.
+* Der **Recovery-Manager** legt Sicherungsko-pien von Datenbeständen an und protokolliert Transaktionen in sog. Logfiles mit, so dass  * Ergebnisse abgeschlossener Transaktionen nach Fehlern wieder in die Daten-bank eingespielt werden können,  * Änderungen in der Datenbank, die durch nicht abgeschlossene Transaktionen bewirkt wurden, rückgängig gemacht werden können,  * Im Falle von Speicherfehlern (Platten) der jüngste konsistente Zustand der Datenbank wiederhergestellt werden kann.
+* **ACID:** *Atomicity, consistency, isolation, durability*
+  * **Unteilbarkeit** *(atomicity)*
+    > Eine Transaktion ist eine unteilbare Verarbeitungseinheit; sie wird entweder ganz oder überhaupt nicht ausgeführt.
+  * **Konsistenz** *(consistency)*
+    > Eine korrekte Ausführung der Transaktion führt die DB von einem konsistenten zu einem konsistenten Zustand.
+  * **Isolation** *(isolation)*
+    > Eine Transaktion muss so ablaufen, als sei sie die einzige im System. Zwischenzustände (die ja inkonsistent sein können) dürfen für andere Transaktionen nicht sichtbar sein.
+  * **Dauerhaftigkeit** *(durability)*
+    > Ergebnisse einer erfolgreich beendeten Transaktion sind dauerhaft, d.h. überleben jeden nachfolgenden Fehler.
+    
+##### Beginn und Ende von Transaktionen
+
+* Folgende Statements started eine Transaktion:
+  * SQL-Schema Statements:
+    * `ALTER`
+    * `CREATE`
+    * `DROP`
+    * `GRANT`
+    * `REVOKE`
+  * SQL-Daten Statements
+    * `OPEN`  
+    * `CLOSE`
+    * `FETCH`
+    * `INSERT`
+    * `UPDATE`
+    * `DELETE`
+    * `FREE LOCATOR`
+    * `HOLD LOCATOR`
+  * Transaktions-Statements
+    * `START STATEMENT`
+    * `COMMIT AND CHAIN`
+    * `ROLLBACK AND CHAIN`
+  * SQL-Kontroll Statement
+    * `RETURN`
+
+#### 3.3.3 Kopplung von SQL an eine Programmiersprache
+
+* **Embeded SQL** hat sich als die Kopplungsart durchgesetzt.
+    * Ein *precompiler* übersetzt den SQL in die Wirtsprache erst, vor das Program kompiliert wird.
