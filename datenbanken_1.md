@@ -572,3 +572,66 @@ CREATE     VIEW ZAHL_DER_ANGEST (ABTNR, ANZAHL) AS            SELECT     ABTNR,
 
 * **Embeded SQL** hat sich als die Kopplungsart durchgesetzt.
     * Ein *precompiler* übersetzt den SQL in die Wirtsprache erst, vor das Program kompiliert wird.
+    
+#### 3.3.4 Prozedurale Programmierung und SQL
+
+* Es gibt kaum einen Einheitlichkeit in der Syntax der Prozeduralen Sprachelementen. 
+* Folgendes ist vom PL/SQL. Der Syntax lehnt sich an die Sprache ADA.
+
+##### Prozeduren und Funktionen (*Stored Procedures*)
+
+* Sind in der Datenbank gespeicherte Operationen. (nicht generisch)
+* Vorzüge:
+    * Einmal geschrieben, mehrmals benutzt. PL/SQL können IO parameter haben.
+    * Durch die Trennung der Definition und Benutzung, kann der zugriffsplan Optimiert werden.
+    * Reduktion der Übertragungszeit -> nur der Pruzedur-Name muss übertragen werden. 
+    * Wenn mann den Benutzer die generische Funktionen verbieten, und vor-difinierte  denn kann mann den Benutzer nur bestimmte Änderung im Datenbestand durchführen.
+
+###### Syntax von Prozeduren
+
+````CREATE PROCEDURE <Prozedurname>(<Parameterliste>)ISBEGIN<Anweisungen>END
+````
+###### Syntax von Funktionen
+
+* Der unterschied ist, dass ein ausgezeichneter Rückgabeparameter dazu gehört.
+
+````
+CREATE FUNCTION <Funktionsname>(<Parameterliste>)
+RETURN <Typ des Rückgabewertes>ISBEGIN<Anweisungen>END
+````
+
+Beispiel:
+
+````
+CREATE PROCEDURE AssignToProject    (Angestellter IN INTEGER,    Projekt IN INTEGER,    proz_Arbeit IN INTEGER,    Gehaltsaufschlag IN INTEGER)IS
+BEGIN
+    INSERT INTO ANG_PRO        VALUES (Projekt, Angestellter, proz_Arbeit);    
+    UPDATE ANGEST        SET Gehalt = Gehalt + Gehaltsaufsc        WHERE ANGNR = Angestelter;
+END;
+````
+
+##### Trigger
+
+````
+CREATE TRIGGER <Triggername> [BEFORE|AFTER]    [INSERT, UPDATE, DELETE] ON <Tabellenname>    [FOR EACH ROW]BEGIN    <Anweisungen>END;
+````
+
+##### Cursor
+
+> Cursor sind ein Hilfsmittel, um bei der imperativen Programmierung, welche tupel-orientiert ist, einen Zugriff auf die Ergebnisse der SQL-Queries, welche mengenorientiert sind, zu erhalten (siehe auch Abschnitt 3.3.3). Zunächst wird der Cursor definiert, dann in der OPEN-Anweisung geöffnet, und anschließend wer-den die Elemente der Ergebnismenge in einer Folge von FETCH-Anweisungen durchlaufen und bearbeitet. Mit dem FOUND-Attribut des Cursors kann man fest-stellen, ob das FETCH noch ein weiteres Element geliefert hat oder ob die Ergeb-nismenge bereits vollständig durchlaufen wurde.
+
+````
+-- Der folgende Trigger prüft, ob bei den Einfügungen 
+-- in der Tabelle ANG_PRO berücksichtigt wurde, 
+-- dass der prozentuale Anteil an der Ar-beitszeit zwischen 0  
+-- und 100 Prozent liegt. Zusätzlich prüft der Trigger, 
+-- ob auch die Summe der Arbeitszeit eines jeden 
+-- Angestellten in diesem Be-reich liegt.
+
+CREATE TRIGGER ANGPROCHECK BEFORE INSERT ON    ANG_PRO
+    FOR EACH ROW    
+DECLARE    CURSOR Arbeitszeit_Cursor IS        SELECT SUM(PROZ_ARB)        FROM ANG_PRO        GROUP BY ANGNR;        Arbeitszeit INTEGER;BEGIN    IF :new.PROZ_ARB < 0 OR :new.PROZ_ARB > 100        -- :new.PROZ_ARB ist der Wert des Attributs PROZ_ARB im        -- neu einzufügenden Tupel    THEN    RAISE INVALID INSERT;
+        ELSE        OPEN Arbeitszeit_Cursor;        FETCH Arbeitszeit_Cursor INTO Arbeitszeit;    WHILE Arbeitszeit_Cursor%FOUND    LOOP        IF Arbeitszeit < 0 OR Arbeitszeit > 100 THEN            CLOSE Arbeitszeit_Cursor;            RAISE INVALID Arbeitszeit-Summe;        ELSE            FETCH Arbeitszeit_Cursor INTO Arbeitszeit;        END IF;    END LOOP;
+            CLOSE Arbeitszeit_Cursor;    END IF;END
+````
+
