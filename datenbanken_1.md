@@ -689,16 +689,69 @@ CREATE TRIGGER ANGPROCHECK BEFORE INSERT ON    ANG_PRO
 #### Datenmanager
 * Die Schnittstelle zwischen Anwendungsprogramm und Datensystem ist mengenorientiert, d.h. die Objekte dieser Schnittstelle sind Relationen und Tupel, die Operatoren sind relationale Sprachen, etwa SQL.* Übersetzt und OptimierT die Benutzerabfragen.* Überprüft die Zugriffsberechtigungen der Benutzer zu allen in den Anweisungen referenzierten Daten.* Integritätskontrollen durchführen.
 ### 3.6 Der Datenbank-Entwurfprozess
+
+* Der Datenbank-Entwurf ist in der Regel Teil eines umfassenderen Prozesses, in dem ein Informationssystem (etwa eines Unternehmens) entwickelt wird.
 #### 3.6.1 Datenbank-Entwirf als Teil der Entwicklung von Informationstemen
+* Der Entwurfprozess der Datenbank wird als Bestandteil des Software-Entwurfprozesses für das Informationssystem des Unternehmens.
+
+##### Phasen eines Informationssystems:
+
+1. **Machbarkeitsanalyse**: wirtschaftlich und technisch durchführbar?
+2. **Erfassung und Analyse der Anforderungen**
+3. **Entwurf**
+4. **Implementierung**
+5. **Validierung und Abnahmetests**
+6. **Installation, Betrieb, Wartung**
 #### 3.6.2 Der konzeptuelle Datenbank-Entwurf
-#### 3.6.4 Abbildung von ER-Diagrammen in relationale Schemata
+
+* Ziele
+    * Erfüllung der Anforderungen, die an die Dateninhalte gestellt werden.
+    * Bereitstelung einer natürlichen un verständlichen Strukturierung der Informationen.
+    * Unterstützung der Verarbeitungsanforderungen
+* Das Ergebnis des Entwurfsprozesses ist ein Datenbank-Schema, das die Basis für die Implementierung der Datenbank darstellt.
+* Phasen des Datenbank-Entwurfsprozess.
+    1. Erfassung und Analyse der Anforderungen
+    2. Konzeptueller Datenbankentwurf
+    3. Wahl des DBMS
+    4. Abbildung des Entwurfes auf das Datenmodell / a.k.a. logischer Entwurf
+    5. Physischer Datenbank-Entwurf
+    6. Implementierung des Datenbanksystems und Tuning.
+* Vorteile von Erstellung eines DBMS-unabhängigen konzeptuellen Modells:
+    *  Die Modelle von Datenbanksystemen haben typischerweise spezielle Ein-schränkungen, die den konzeptuellen Entwurf nicht beeinflussen sollten
+    * Das konzeptuelle Schema bleibt stabil, selbst wenn sich das eingesetzte Da-tenbanksystem ändern sollte.
+    * Das konzeptuelle Modell stellt eine wichtige Kommunikationsplattform zwi-schen Datenbank-Designern, Anwendungsentwicklern und Benutzern dar.
+* Bei der Erstellung eines komplexen Datenbankschemas kann man zwei prinzipiel-le Ansätze unterscheiden:
+    1. Zentraler SChema-Entwurf
+    2. View-Integration
+* Aktivitäten der Integrationsphase:
+    * welche Objekte in den unter-schiedlichen Teilschemata dieselben Real-Welt-Konzepte darstellen. Es ist damit zu rechnen, dass diese Objekte nicht immer auf dieselbe Art und Weise modelliert worden sind. Beispiele für mögliche Unterschiede
+        * Unterschiedliche Benennungen zur Beschreibung desselben Konzeptes (*Synonyme*), aber auch dieselbe Benennung für unterschiedliche Konzepte (*Homonyme*).
+        * Modellierung eines Konzeptes durch unterschiedliche Modellierungskonstrukte, z.B. als Entity-Typ in Teilschema 1 und als Attribut in Teilschema 2.
+        * Zuordnung von unterschiedlichen Wertemengen, z.B. bei Benutzung von unterschiedlichen Einheiten für Attribute.
+        * Definition unterschiedlicher Constraints; so kann eine Beziehung in Teil-schema 1 etwa als 1:n Beziehung, in Teilschema 2 aber als n:m Beziehung definiert sein.
+    * Bei Vorliegen von derartigen Unterschieden müssen Teilschemata modifiziert werden, um sie untereinander konform zu machen.
+    * Mischen von Teilschemata: Sind die übereinstimmenden Konzepte gleichartig modelliert worden, so können die Teilschemata in ein globales Schema inte-griert werden, indem jedes Konzept nur noch einmal dargestellt wird. Dies ist sicher der komplexeste Schritt und erfordert eine intensive Zusammenarbeit der verschiedenen Benutzergruppen zur Lösung von Konflikten.
+    * Schließlich kann das entstandene globale Schema umstrukturiert werden, um Redundanzen und unnötige Komplexität zu eliminieren
+    
+#### 3.6.3 Abbildung von ER-Diagrammen in relationale Schemata
 ##### Tranformation starker Entity-Typen
+
+>Jeder starke Entity-Typ A wird in eine Relation bzw. Tabelle RA überführt, die die Schlüsselattribute und die Nichtschlüsselattribute des entsprechenden Entity-Typs A enthält. Der Name der Relation bzw. der Tabelle RA entspricht dem Namen des Entity-Typen A. Die Attribute des Entity-Typs A werden die Attribute der Relation bzw. die Spaltennamen der entsprechenden Tabelle RA
 ##### Tranformation von n:m-Beziehungstypen
+
+>Jeder n:m-Beziehungstyp X zwischen zwei Entity-Typen A und B wird in eineeigene Relation bzw. Tabelle RX überführt. Die Primärschlüssel der Relationen RAund RB werden als Fremdschlüssel in RX eingesetzt, wobei deren Kombination denPrimärschlüssel von RX bildet. Die übrigen Attribute von X werden ebenfalls in RXübernommen.
 ##### Tranformation von 1:n-Beziehungstypen
+> Bei dieser Art von Beziehungstypen muss keine neue zusätzliche Relation eingeführtwerden. Stattdessen wird der Primärschlüssel der Relation, die dem Entity Typen auf der 1-Seite entspricht, als Fremdschlüssel mit in die Relation aufge-nommen, die dem Entity-Typen auf der n-Seite entspricht.
 ##### Tranformation von 1:1-Beziehungstypen 
+
+> Diese Transformation wird ähnlich wie die der 1:n-Beziehungstypen gehandhabt. Auch hier muss keine neue zusätzliche Relation eingeführt werden. Seien A und B zwei Entity-Typen. Dann kann man entweder den Primärschlüssel der Relation RA in RB als Fremdschlüssel einfügen, um die Beziehung auszudrücken, oder umge-kehrt den Primärschlüssel der Relation RB in RA.
 ##### Tranformation Schwacher Entity-Typen
+>Schwache Entity-Typen werden ebenfalls auf Relationen abgebildet. Jeder schwa-che Entity-Typ A wird in eine Relation RA überführt, die zunächst alle Attribute des Entity-Typen A enthält. Kann dieser Entity-Typ A nur durch einen anderen starken Entity-Typen B identifiziert werden, man spricht in diesem Zusammen-hang auch vom Owner-Typen B, so wird der Primärschlüssel der Relation RB als Fremdschlüssel in RA eingefügt. Dieser sowie der partielle Schlüssel des schwa-chen Entity-Typen A bilden den Primärschlüssel von RA.. (Unter dem partiellen Schlüssel eines schwachen Entity-Typen versteht man die Menge der Attribute, die ein Entity innerhalb der Menge der schwachen Entitäten, die zu einem Owner gehören, identifiziert.)
 ##### Tranformation mehrwertiger Beziehungstypen
+> Bei den zuvor betrachteten Beziehungstypen sind wir immer davon ausgegangen,dass diese binärer Natur (n=2) sind. Mehrwertige Beziehungstypen, (n>2), werdengrundsätzlich in eine eigene Relation überführt. Sei X ein Beziehungstyp sowieA1, ..., An die n beteiligten Entity-Typen. Die Primärschlüssel der n RelationenRA1, ..., RAn werden als Fremdschlüssel in die neue Relation RX eingeführt, ebensowerden alle Attribute des Beziehungstypen X in die neue Relation RX übernommen.Der Primärschlüssel von RX entspricht der Kombination aller Fremdschlüssel,die auf die Relationen RA1, ..., RAn verweisen.
 ##### Tranforamtion von Supertype/Subtyp-Hierarchien
+
+> Sei der Entity-Typ A der Supertyp der beiden Entity-Typen B und C. Alle an dieserHierarchie beteiligten Entity-Typen werden in eigene Relationen RA, RB bzw.RC überführt. Jede dieser Relationen enthält als Attribute nur die Eigenschaften,die auf der entsprechenden Stufe der Typhierarchie definiert sind und die an diedarunterliegenden Subtypen weitervererbt werden können. Die Relationen enthaltennicht die von oben geerbten Attribute. Die Relationen RB und RC haben alsPrimärschlüssel den Primärschlüssel der Relation RA, wobei diese auch alsFremdschlüssel agieren um auf RA zu verweisen.
 #### 3.6.4 Mögliche Anomalien eines Relationen-Schemas
 #### 3.5.6 Funktionale Abhängigkeit
 #### 3.6.6 Normalisierung
