@@ -6,7 +6,7 @@
 
 **Begriff der Datenbank:**
 
-> Eine Datenbank ist eine integrierte Ansammlung von Daten, die allen Benutzern eines Anwendungsbereiches als gemeinesame Basis aktueller Information dient.
+> Eine Datenbank ist eine integrierte Ansammlung von Daten, die allen Benutzern eines Anwendungsbereiches als gemeinsame Basis aktueller Information dient.
 
 **DBMS:** *Datanbankmanagementsystem* 
 > Das DBMS ist ein Softwaresystem, das es ermöglicht, eine Datenbank zu definieren, Daten zu speichern, zu verändern und zu löschen, sowie Anfragen an die Datenbank zu stellen. 
@@ -19,11 +19,11 @@ Ein DBMS isoliert die DB von den Anwendungsprogrammen, sodass der Programmierer 
 
 #### COBOL 
 
-COBOL wurde in den 70er 80er entwickelt, und hat eine wichtige Rolle bei der Datenverarbeitung gespiert vor der Einführung von relationalen Datenbanken.
+COBOL wurde in den 70er 80er entwickelt, und hat eine wichtige Rolle bei der Datenverarbeitung gespielt vor der Einführung von Relationen Datenbanken.
 
 **Satz:** ist eine Gruppierung von **Datenelementen a.k.a. Felder**.
 
-**Satztyp:** difiniert welche Datenelementen den Satz aufbauen. z.B.: 
+**Satztyp:** definiert welche Datenelementen den Satz aufbauen. z.B.: 
 
 ````
 Satztyp 		ANGESTELLTER
@@ -39,9 +39,9 @@ Datenelemente 	ANGNR 			Angestelltennummer
 
 **Dateisystem**
 
-> Ein **Dateisystem** ist ein Softwarepaket, das den Zugriff auf einzelne Sätze in einer Datei besort, wenn das Anwendungsprogramm die entsprechenden Parameter liefert. 
+> Ein **Dateisystem** ist ein Softwarepaket, das den Zugriff auf einzelne Sätze in einer Datei besorgt, wenn das Anwendungsprogramm die entsprechenden Parameter liefert. 
 
-**Schlüssel** werden benutzt um Datein aufzurufen.
+**Schlüssel** werden benutzt um Dateien aufzurufen.
 
 **Dateiorganisation**
 > Die Speicherung der Sätze einer Datei kann unterschiedlich organisiert werden, üblich sind: *sequentielle Organisation, index-sequentielle Organisationen, direkte Organisationen* (z. B. Hash-Verfahren).````FD 		ANGESTELLTEN-DATEI
@@ -52,24 +52,24 @@ Datenelemente 	ANGNR 			Angestelltennummer
 		02 W-ORT PIC X(30);
 		02 PERS; ... .
 		02 GEHALT; ... .````
-Es herrscht also eine enge Kopplung zwischen Programm und Datei, dies führt zu schwierige probleme:
+Es herrscht also eine enge Kopplung zwischen Programm und Datei, dies führt zu schwierige Probleme:
 
 #### Probleme der traditionelle Datenverwaltung
-1. **Redudanz**
+1. **Redundanz**
 > Da die Daten jeweils speziell für bestimmte Anwendungen entworfen werden, werden dieselben Daten in verschiedenen Dateien wieder auftauchen. Redundanz führt zu Speicherverschwendung und zu erhöhten Verarbeitungskosten, vor allem bei Änderungen. Schlimmer jedoch ist es, dass diese Redundanz in der Regel nicht zentral kontrolliert wird, so dass Konsistenzprobleme auftreten. 2. **Inkonsistenz**
-> Die Konsistenz der Daten (d.h. die logische Übereinstrimmung der Datei-Inhalte) kann nur schwer gewährleistet werden. Bei der Änderung einer Gröse müssten alle Dateien geändert werden, die diese Größe beinhalten. und diese verschiedene Programme zum selben Zeitpunkt unterschiedliche Werte derselben Größe sehen können.3. **Daten-Programm-Abhängigkeit**
-> Ändert sich der Aufbau einer Datei oder ihrer Organisationsform, so müssen darauf basierende Programme geändert werden. [...]4. **Inflexibilität**> Da die daten nicht in ihrer Gesamtheit, sondern nu anwendungsbezogen gesehen werden, ist es in vielen Fällen sehr kompliziert, neue Anwendungen oder Auswerungen vorhandener Daten zu realisieren. Dies gilt insbesondere für Auswertungen, die Daten aus verschiedenen Daeien benötigen würden. Die Organisation nach diesem konventionellen Vorgehen ist sehr wenig anpassungsfähig an die sich verändernden Anforderungen in einem Unternehmen. 
-Um die probleme zu lösen wurden Daten als eingesdtändiges Betriebsmittel eines Unternehmens. Dazu ist auch die Trennung von Programm und Daten, **die Datenunabhängigkeit**, zentral. 
-**Integrität der Daten:** Korrektheit und Vollständigkeit der abgespeicherten Daten. 
-> Die zentrale Verwaltung der Daten durch das DBMS ermöglicht es, bei Änderung von Daten Kontrollroutinen einzuschalten oder von Zeit zu Zeit mit Hilfe spezieller Prüfprogramme nach Integritätsverlet-zungen zu suchen.
+> Die Konsistenz der Daten (d.h. die logische Übereinstimmung der Datei-Inhalte) kann nur schwer gewährleistet werden. Bei der Änderung einer Größe müssten alle Dateien geändert werden, die diese Größe beinhalten. und diese verschiedene Programme zum selben Zeitpunkt unterschiedliche Werte derselben Größe sehen können.3. **Daten-Programm-Abhängigkeit**
+> Ändert sich der Aufbau einer Datei oder ihrer Organisationsform, so müssen darauf basierende Programme geändert werden. [...]4. **Inflexibilität**> Da die Daten nicht in ihrer Gesamtheit, sondern nu anwendungsbezogen gesehen werden, ist es in vielen Fällen sehr kompliziert, neue Anwendungen oder Auswerungen vorhandener Daten zu realisieren. Dies gilt insbesondere für Auswertungen, die Daten aus verschiedenen Dateien benötigen würden. Die Organisation nach diesem konventionellen Vorgehen ist sehr wenig anpassungsfähig an die sich verändernden Anforderungen in einem Unternehmen. 
+Um die Probleme zu lösen wurden Daten als eingensdtändiges Betriebsmittel eines Unternehmens. Dazu ist auch die Trennung von Programm und Daten, **die Datenunabhängigkeit**, zentral. 
+**Integrität der Daten:** Korrektheit und Vollständigkeit der abgesicherten Daten. 
+> Die zentrale Verwaltung der Daten durch das DBMS ermöglicht es, bei Änderung von Daten Kontrollroutinen einzuschalten oder von Zeit zu Zeit mit Hilfe spezieller Prüfprogramme nach Integritätsverletzungen zu suchen.
 #### Vorteile der Datenbank-Philosophie:
 1. Es gibt eine gemeinsame Basis für alle Anwendungen.
 2. Redundanz entfällt.
 3. Keine Konsistenzprobleme der traditioneller Dateiorganisationen. (wegen pt. 2)
 4. Die Anwendungsprogrammierung wird einfacher. Der Programmierer muss nur die Eigenschaften der Daten kennen, nicht wie die gespeichert sind.
-5. Application-Data abhängigkeit wird reduziert. 
-6. DBS verschafft mehr flexilibität für diue Datenauswertung.
-7. Daws DBS kann zentral die Korrektheir von Daten überprüfen. 
+5. Application-Data Abhängigkeit wird reduziert. 
+6. DBS verschafft mehr Flexibilität für die Datenauswertung.
+7. Das DBS kann zentral die Korrektheit von Daten überprüfen. 
 ## 2. Architektur eines DBS
 ### 2.1 Drei Datenebenen
 #### Logische Gesamtsicht
@@ -153,8 +153,8 @@ geht die Abarbeitung wie folgt vor:
 5. Auswahl einer Seite im Systempuffer, die durch die benötigte Seite überlagert werden kann. Falls die zu ersetzende Seite verändert wurde, muss sie in die Datenbank geschrieben werden.
 6. Das DBMS ruft das Betriebssystem für zwei E/A-Vorgänge auf: * Schreiben der zu ersetzenden Seite in die Datenbank (entfällt gegebenen-falls) * Einlesen der gesuchten Seite.
 7. Das Betriebssystem führt die physischen E/A-Aufträge durch und speichert die angeforderte Seite an der vorgegebenen Adresse im Systempuffer.
-8. Das DBMS liest den gesuchten Satz aus dem Systempuffer, transformiert ihn in die durch das externe Schema definierte Form und überträgt ihn in den Ar-beitsbereich (user work area - UWA) des Anwendungsprogrammes. In der UWA ist ein Speicherbereich für diesen Satztyp reserviert.
-9. Das DBMS hinterlegt Status-Information über den Ausgang der Operation in einem speziellen Bereich der UWA. Diese Status-Information ist dem An-wendungsprogramm zugänglich.
+8. Das DBMS liest den gesuchten Satz aus dem Systempuffer, transformiert ihn in die durch das externe Schema definierte Form und überträgt ihn in den Arbeitsbereich (user work area - UWA) des Anwendungsprogrammes. In der UWA ist ein Speicherbereich für diesen Satztyp reserviert.
+9. Das DBMS hinterlegt Status-Information über den Ausgang der Operation in einem speziellen Bereich der UWA. Diese Status-Information ist dem Anwendungsprogramm zugänglich.
 10. Das Anwendungsprogramm verarbeitet den Satz. (Wir betrachten hier nicht die Abläufe auf der Sprachebene, wenn - wie in diesem Beispiel angedeutet - SQL in ein Programm in einer klassischen Programmiersprache eingebettet ist; s. unter relationale Datenbanken).
 
 #### Weitere Aufgaben des DBMS
@@ -170,7 +170,7 @@ geht die Abarbeitung wie folgt vor:
     * Attribute
 * Die Daten werden im **Katalog** a.k.a. **Data Dictionary** des DBMS gespeichert.
 
-##### Integrität der DAtenbank
+##### Integrität der Datenbank
 
 * Das DBMS soll soweit wie möglich Integritätsverletzungen verhindern. 
 
@@ -215,7 +215,7 @@ Typische Tools sind
 ### 2.7 Datenunabhängigkeit
 
 * Die dreischichtige Betrachtungsweise der Daten ist der Schlüssel zur Datenunabhängigkeit.
-* Änderungen innerhalb einer Ebene können in gewissem Umfang von den übrigen Ebenen ferngehalten werden, indem man die Änderun-gen durch die zwischengelagerten Transformationsregeln auffängt.
+* Änderungen innerhalb einer Ebene können in gewissem Umfang von den übrigen Ebenen ferngehalten werden, indem man die Änderungen durch die zwischengelagerten Transformationsregeln auffängt.
 > **Physische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen der physischen Datenorganisation.
 * Da das konzeptuelle Modell unberührt bleibt, bleiben auch die externen Modelle und damit alle Benutzerprogramme von Änderungen der Datenorganisation unberührt. So führen also Änderungen von *Dateiorganisationen*, das *Umstrukturieren von Sätzen* (z. B. Zerlegen von großen Sätzen in separate Teilsätze), das *Anlegen von Indexen*, usw. nicht mehr zu Änderungen bestehender Programme.
 > **Logische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen des konzeptuellen Modells.
@@ -242,7 +242,7 @@ Typische Tools sind
 ##### Relationships
 
 * Beziehungen
-* Ein Bezie-hungstyp kann mehrere Entity Typen umfassen; wir schreiben $$$B(E_1, E_2, ... E_k)$$$ .
+* Ein Beziehungstyp kann mehrere Entity Typen umfassen; wir schreiben $$$B(E_1, E_2, ... E_k)$$$ .
 * In der praktischen Anwendung ist die Mehrzahl der Beziehungen zweistellig.
 
 ##### Attributes
@@ -635,3 +635,71 @@ CREATE TRIGGER ANGPROCHECK BEFORE INSERT ON    ANG_PRO
             CLOSE Arbeitszeit_Cursor;    END IF;END
 ````
 
+### 3.4 Optimierung von Abfragen
+
+* der **Query-Prozessor** muss *Abfrageoptimierung* betreiben.
+* Abfrageoptimierung ist ein sehr komplexes Problem - und in Wirklichkeit optimieren die Systeme nicht, sondern ermitteln lediglich eine mit großer Wahrscheinlichkeit gute Ausführungsstrategie.
+
+#### Algebraische Optimierung
+
+##### Operatorbaum
+
+![operatorenbaum](img/operatorbaum.png)
+
+* Die Rechtecke stellen Relationen.
+* Die Ellipsen Operationen dar.
+
+![operatorenbaum](img/operatorbaum2.png)
+
+##### Optimierungsregeln:
+
+1. Selektionen auf dem gleichen Operanden werden zu komplexen Selektionen zusammengefasst.
+2. Selektionen werden soweit als möglich zu den Blattknoten des Operatorbaumes verschoben. Mit anderen Worten: Selektionen werden möglichst früh ausgeführt. -> *Alle Selektionen, die sich auf jeweils eine Relation beziehen, werden vor dem Join ausgeführt.*
+3. Projektionen, die keine Eliminierung von Duplikaten erfordern, werden so früh wie möglich, jedoch nicht vor jeiner Selektion durchegeführt. *Eine Projektion erfordert dann keine Elimination von Duplikaten, wenn dabei zumindest ein Schlüssel des Relationenschemas erhalten bleibt.*4. Projektionen, die eine Eliminierung von Duplikaten erfordern, sind also so-weit als möglich zur Wurzel des Operatorbaumes zu verschieben.
+5. Suche gemeinsame Teilbäume des Operatorbaums. Wenn das Ergebnis des gemeinsamen Teilausdruckes eine Relation ist, die vom Sekundärspeicher in sehr viel kürzerer Zeit gelesen werden kann, als zu ihrer Berechnung notwendig ist, so lohnt es sich, diese Zwischenrelation nur einmal zu berechnen und abzuspeichern (Hier kommt es also nicht auf eine Umstrukturierung der Ab-frage an, sondern auf das Erkennen gleicher Teilbäume).##### Optimierung auf der physischen Ebene
+###### Ausnutzung von Sekundärindexen
+* Ein Sekundärindex ist eine Datenstruktur, mit welcher der Zugriff auf einzelne Datensätze einer Menge von Datensätzen beschleunigt wird.
+* Diese Daten-struktur beinhaltet ein Verzeichnis von Wertpaaren (s, p). s ist die Ausprägung des Merkmals, für welches der Index aufgebaut wird, p ist der Ort des Datensatzes, welcher diese Merkmalsausprägung besitzt.
+
+###### Sortieren von R nach A und von S nach B
+
+>Zum Sortieren von n Tupeln werden bei Verwendung effizienter Sortierverfahren in der Größenordnung (n log n) Schritte benötigt. Das anschließende Erstellen des Verbundes ist dann sehr schnell: sind R und S sortiert, so werden sie einfach pa-rallel durchlaufen, wobei jeweils auf gleiche Werte für A und B zu prüfen ist.
+
+
+### 3.5 Implementierung eines relationalen Datenbenksystems
+
+* Es geht bei der Schichtenbildung nicht nur um die Abbildung von Relationen auf speicherbezogene Datenstrukturen, sondern auch um die geeignete Anordnung der funktionalen Komponenten    - Abfrageoptimierer,    - Autorisierung und Integritätskontrolle,    - Recovery sowie    - Synchronisation.![Softwareschichten eines DBMS](img/sofwareschichten_eines_dbms.PNG)#### Systempuffer-Manager 
+* Aufgabe des Systempuffer-Manager: 
+> die Chance möglichst groß zu halten, dass eine Seite, auf die zugegriffen werden muss, sich bereits im Arbeitsspeicher befindet
+* Der Datentransport zwischen Arbeitsspeicher und Externspeicher geschieht in Einheiten von Seiten fester Größe.
+* Die Seitenverwaltung in Datenbanksystemen muss jedoch zusätzliche Anforderungen erfüllen:    * **Pinned Pages:** Im Zusammenspiel mit der Recovery (Wiederherstellung nach Fehlern) dürfen Seiten nicht beliebig in die Datenbank geschrieben werden. Solche Seiten nennen wir pinned (festgeheftet). Beispielsweise ist Recovery nach einem Fehler sehr einfach, wenn die betroffenen Seiten noch nicht in die Datenbank zurückgeschrieben wurden.    * **forces output:** Ebenfalls im Zusammenhang mit der Recovery müssen gelegentlich Seiten auf den Externspeicher zurückgeschrieben werden, obwohl der Platz im Systempuffer gar nicht benötigt wird.    #### Zugriffsmanager
+* Stellt eine Schnittstelle zur Verfügung, in der einzelne Tupel und logische Zugriffspfade angesprochen werden können.* **Objekte der Ein-Tupel-Schnittstelle**
+    * Tupel
+    * Indexe
+> Indexe definieren eine logische Ordnung der Tupel einer Relation, so dass man über den Index auf ein erstes, zweites usw. Tupel entsprechend dieser Ordnung zugreifen kann.
+* Der Zugriffsmanager muss folgende Operatoren zur Verfügung stellen:
+    * Zugriff auf Tupel mit gegebenen Attributwerten
+    * ZUgriff auf Tupel aufgrund ihrere Position. `FIND NEXT`
+    * Bereitstellen eines Tupels in einem Übergabebereich.
+    * Einfügen, Löschen eines Tupels
+    * Verändern von Attributwerten eines Tupels.
+* Wenn die verlangte seiten nicht im Systempuffer sind, dann verlang der Zugriffsmanager die daten vom Systempuffer-Manager.
+* Zu diesen Operatoren auf Tupeln kommen solche für das Lesen von Schemaeinträgen, für das Anlegen und Löschen solcher Einträge
+* Die Ein-Tupel-Schnittstelle muss ferner geeignete Operatoren für das Transakti-onsmanagement zur Verfügung stellen.
+#### Datenmanager
+* Die Schnittstelle zwischen Anwendungsprogramm und Datensystem ist mengenorientiert, d.h. die Objekte dieser Schnittstelle sind Relationen und Tupel, die Operatoren sind relationale Sprachen, etwa SQL.* Übersetzt und OptimierT die Benutzerabfragen.* Überprüft die Zugriffsberechtigungen der Benutzer zu allen in den Anweisungen referenzierten Daten.* Integritätskontrollen durchführen.
+### 3.6 Der Datenbank-Entwurfprozess
+#### 3.6.1 Datenbank-Entwirf als Teil der Entwicklung von Informationstemen
+#### 3.6.2 Der konzeptuelle Datenbank-Entwurf
+#### 3.6.4 Abbildung von ER-Diagrammen in relationale Schemata
+##### Tranformation starker Entity-Typen
+##### Tranformation von n:m-Beziehungstypen
+##### Tranformation von 1:n-Beziehungstypen
+##### Tranformation von 1:1-Beziehungstypen 
+##### Tranformation Schwacher Entity-Typen
+##### Tranformation mehrwertiger Beziehungstypen
+##### Tranforamtion von Supertype/Subtyp-Hierarchien
+#### 3.6.4 Mögliche Anomalien eines Relationen-Schemas
+#### 3.5.6 Funktionale Abhängigkeit
+#### 3.6.6 Normalisierung
+#### 3.6.7 Zusammenfassung
