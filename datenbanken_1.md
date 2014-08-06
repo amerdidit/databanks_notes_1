@@ -6,7 +6,7 @@
 
 **Begriff der Datenbank:**
 
-> Eine Datenbank ist eine integrierte Ansammlung von Daten, die allen Benutzern eines Anwendungsbereiches als gemeinesame Basis aktueller Information dient.
+> Eine Datenbank ist eine integrierte Ansammlung von Daten, die allen Benutzern eines Anwendungsbereiches als gemeinsame Basis aktueller Information dient.
 
 **DBMS:** *Datanbankmanagementsystem* 
 > Das DBMS ist ein Softwaresystem, das es ermöglicht, eine Datenbank zu definieren, Daten zu speichern, zu verändern und zu löschen, sowie Anfragen an die Datenbank zu stellen. 
@@ -19,11 +19,11 @@ Ein DBMS isoliert die DB von den Anwendungsprogrammen, sodass der Programmierer 
 
 #### COBOL 
 
-COBOL wurde in den 70er 80er entwickelt, und hat eine wichtige Rolle bei der Datenverarbeitung gespiert vor der Einführung von relationalen Datenbanken.
+COBOL wurde in den 70er 80er entwickelt, und hat eine wichtige Rolle bei der Datenverarbeitung gespielt vor der Einführung von Relationen Datenbanken.
 
 **Satz:** ist eine Gruppierung von **Datenelementen a.k.a. Felder**.
 
-**Satztyp:** difiniert welche Datenelementen den Satz aufbauen. z.B.: 
+**Satztyp:** definiert welche Datenelementen den Satz aufbauen. z.B.: 
 
 ````
 Satztyp 		ANGESTELLTER
@@ -39,9 +39,9 @@ Datenelemente 	ANGNR 			Angestelltennummer
 
 **Dateisystem**
 
-> Ein **Dateisystem** ist ein Softwarepaket, das den Zugriff auf einzelne Sätze in einer Datei besort, wenn das Anwendungsprogramm die entsprechenden Parameter liefert. 
+> Ein **Dateisystem** ist ein Softwarepaket, das den Zugriff auf einzelne Sätze in einer Datei besorgt, wenn das Anwendungsprogramm die entsprechenden Parameter liefert. 
 
-**Schlüssel** werden benutzt um Datein aufzurufen.
+**Schlüssel** werden benutzt um Dateien aufzurufen.
 
 **Dateiorganisation**
 > Die Speicherung der Sätze einer Datei kann unterschiedlich organisiert werden, üblich sind: *sequentielle Organisation, index-sequentielle Organisationen, direkte Organisationen* (z. B. Hash-Verfahren).````FD 		ANGESTELLTEN-DATEI
@@ -52,24 +52,24 @@ Datenelemente 	ANGNR 			Angestelltennummer
 		02 W-ORT PIC X(30);
 		02 PERS; ... .
 		02 GEHALT; ... .````
-Es herrscht also eine enge Kopplung zwischen Programm und Datei, dies führt zu schwierige probleme:
+Es herrscht also eine enge Kopplung zwischen Programm und Datei, dies führt zu schwierige Probleme:
 
 #### Probleme der traditionelle Datenverwaltung
-1. **Redudanz**
+1. **Redundanz**
 > Da die Daten jeweils speziell für bestimmte Anwendungen entworfen werden, werden dieselben Daten in verschiedenen Dateien wieder auftauchen. Redundanz führt zu Speicherverschwendung und zu erhöhten Verarbeitungskosten, vor allem bei Änderungen. Schlimmer jedoch ist es, dass diese Redundanz in der Regel nicht zentral kontrolliert wird, so dass Konsistenzprobleme auftreten. 2. **Inkonsistenz**
-> Die Konsistenz der Daten (d.h. die logische Übereinstrimmung der Datei-Inhalte) kann nur schwer gewährleistet werden. Bei der Änderung einer Gröse müssten alle Dateien geändert werden, die diese Größe beinhalten. und diese verschiedene Programme zum selben Zeitpunkt unterschiedliche Werte derselben Größe sehen können.3. **Daten-Programm-Abhängigkeit**
-> Ändert sich der Aufbau einer Datei oder ihrer Organisationsform, so müssen darauf basierende Programme geändert werden. [...]4. **Inflexibilität**> Da die daten nicht in ihrer Gesamtheit, sondern nu anwendungsbezogen gesehen werden, ist es in vielen Fällen sehr kompliziert, neue Anwendungen oder Auswerungen vorhandener Daten zu realisieren. Dies gilt insbesondere für Auswertungen, die Daten aus verschiedenen Daeien benötigen würden. Die Organisation nach diesem konventionellen Vorgehen ist sehr wenig anpassungsfähig an die sich verändernden Anforderungen in einem Unternehmen. 
-Um die probleme zu lösen wurden Daten als eingesdtändiges Betriebsmittel eines Unternehmens. Dazu ist auch die Trennung von Programm und Daten, **die Datenunabhängigkeit**, zentral. 
-**Integrität der Daten:** Korrektheit und Vollständigkeit der abgespeicherten Daten. 
-> Die zentrale Verwaltung der Daten durch das DBMS ermöglicht es, bei Änderung von Daten Kontrollroutinen einzuschalten oder von Zeit zu Zeit mit Hilfe spezieller Prüfprogramme nach Integritätsverlet-zungen zu suchen.
+> Die Konsistenz der Daten (d.h. die logische Übereinstimmung der Datei-Inhalte) kann nur schwer gewährleistet werden. Bei der Änderung einer Größe müssten alle Dateien geändert werden, die diese Größe beinhalten. und diese verschiedene Programme zum selben Zeitpunkt unterschiedliche Werte derselben Größe sehen können.3. **Daten-Programm-Abhängigkeit**
+> Ändert sich der Aufbau einer Datei oder ihrer Organisationsform, so müssen darauf basierende Programme geändert werden. [...]4. **Inflexibilität**> Da die Daten nicht in ihrer Gesamtheit, sondern nu anwendungsbezogen gesehen werden, ist es in vielen Fällen sehr kompliziert, neue Anwendungen oder Auswerungen vorhandener Daten zu realisieren. Dies gilt insbesondere für Auswertungen, die Daten aus verschiedenen Dateien benötigen würden. Die Organisation nach diesem konventionellen Vorgehen ist sehr wenig anpassungsfähig an die sich verändernden Anforderungen in einem Unternehmen. 
+Um die Probleme zu lösen wurden Daten als eingensdtändiges Betriebsmittel eines Unternehmens. Dazu ist auch die Trennung von Programm und Daten, **die Datenunabhängigkeit**, zentral. 
+**Integrität der Daten:** Korrektheit und Vollständigkeit der abgesicherten Daten. 
+> Die zentrale Verwaltung der Daten durch das DBMS ermöglicht es, bei Änderung von Daten Kontrollroutinen einzuschalten oder von Zeit zu Zeit mit Hilfe spezieller Prüfprogramme nach Integritätsverletzungen zu suchen.
 #### Vorteile der Datenbank-Philosophie:
 1. Es gibt eine gemeinsame Basis für alle Anwendungen.
 2. Redundanz entfällt.
 3. Keine Konsistenzprobleme der traditioneller Dateiorganisationen. (wegen pt. 2)
 4. Die Anwendungsprogrammierung wird einfacher. Der Programmierer muss nur die Eigenschaften der Daten kennen, nicht wie die gespeichert sind.
-5. Application-Data abhängigkeit wird reduziert. 
-6. DBS verschafft mehr flexilibität für diue Datenauswertung.
-7. Daws DBS kann zentral die Korrektheir von Daten überprüfen. 
+5. Application-Data Abhängigkeit wird reduziert. 
+6. DBS verschafft mehr Flexibilität für die Datenauswertung.
+7. Das DBS kann zentral die Korrektheit von Daten überprüfen. 
 ## 2. Architektur eines DBS
 ### 2.1 Drei Datenebenen
 #### Logische Gesamtsicht
@@ -153,8 +153,8 @@ geht die Abarbeitung wie folgt vor:
 5. Auswahl einer Seite im Systempuffer, die durch die benötigte Seite überlagert werden kann. Falls die zu ersetzende Seite verändert wurde, muss sie in die Datenbank geschrieben werden.
 6. Das DBMS ruft das Betriebssystem für zwei E/A-Vorgänge auf: * Schreiben der zu ersetzenden Seite in die Datenbank (entfällt gegebenen-falls) * Einlesen der gesuchten Seite.
 7. Das Betriebssystem führt die physischen E/A-Aufträge durch und speichert die angeforderte Seite an der vorgegebenen Adresse im Systempuffer.
-8. Das DBMS liest den gesuchten Satz aus dem Systempuffer, transformiert ihn in die durch das externe Schema definierte Form und überträgt ihn in den Ar-beitsbereich (user work area - UWA) des Anwendungsprogrammes. In der UWA ist ein Speicherbereich für diesen Satztyp reserviert.
-9. Das DBMS hinterlegt Status-Information über den Ausgang der Operation in einem speziellen Bereich der UWA. Diese Status-Information ist dem An-wendungsprogramm zugänglich.
+8. Das DBMS liest den gesuchten Satz aus dem Systempuffer, transformiert ihn in die durch das externe Schema definierte Form und überträgt ihn in den Arbeitsbereich (user work area - UWA) des Anwendungsprogrammes. In der UWA ist ein Speicherbereich für diesen Satztyp reserviert.
+9. Das DBMS hinterlegt Status-Information über den Ausgang der Operation in einem speziellen Bereich der UWA. Diese Status-Information ist dem Anwendungsprogramm zugänglich.
 10. Das Anwendungsprogramm verarbeitet den Satz. (Wir betrachten hier nicht die Abläufe auf der Sprachebene, wenn - wie in diesem Beispiel angedeutet - SQL in ein Programm in einer klassischen Programmiersprache eingebettet ist; s. unter relationale Datenbanken).
 
 #### Weitere Aufgaben des DBMS
@@ -170,7 +170,7 @@ geht die Abarbeitung wie folgt vor:
     * Attribute
 * Die Daten werden im **Katalog** a.k.a. **Data Dictionary** des DBMS gespeichert.
 
-##### Integrität der DAtenbank
+##### Integrität der Datenbank
 
 * Das DBMS soll soweit wie möglich Integritätsverletzungen verhindern. 
 
@@ -215,7 +215,7 @@ Typische Tools sind
 ### 2.7 Datenunabhängigkeit
 
 * Die dreischichtige Betrachtungsweise der Daten ist der Schlüssel zur Datenunabhängigkeit.
-* Änderungen innerhalb einer Ebene können in gewissem Umfang von den übrigen Ebenen ferngehalten werden, indem man die Änderun-gen durch die zwischengelagerten Transformationsregeln auffängt.
+* Änderungen innerhalb einer Ebene können in gewissem Umfang von den übrigen Ebenen ferngehalten werden, indem man die Änderungen durch die zwischengelagerten Transformationsregeln auffängt.
 > **Physische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen der physischen Datenorganisation.
 * Da das konzeptuelle Modell unberührt bleibt, bleiben auch die externen Modelle und damit alle Benutzerprogramme von Änderungen der Datenorganisation unberührt. So führen also Änderungen von *Dateiorganisationen*, das *Umstrukturieren von Sätzen* (z. B. Zerlegen von großen Sätzen in separate Teilsätze), das *Anlegen von Indexen*, usw. nicht mehr zu Änderungen bestehender Programme.
 > **Logische Datenunabhängigkeit** bedeutet Isolierung der Anwendungsprogramme von Änderungen des konzeptuellen Modells.
@@ -242,7 +242,7 @@ Typische Tools sind
 ##### Relationships
 
 * Beziehungen
-* Ein Bezie-hungstyp kann mehrere Entity Typen umfassen; wir schreiben $$$B(E_1, E_2, ... E_k)$$$ .
+* Ein Beziehungstyp kann mehrere Entity Typen umfassen; wir schreiben $$$B(E_1, E_2, ... E_k)$$$ .
 * In der praktischen Anwendung ist die Mehrzahl der Beziehungen zweistellig.
 
 ##### Attributes
@@ -572,3 +572,221 @@ CREATE     VIEW ZAHL_DER_ANGEST (ABTNR, ANZAHL) AS            SELECT     ABTNR,
 
 * **Embeded SQL** hat sich als die Kopplungsart durchgesetzt.
     * Ein *precompiler* übersetzt den SQL in die Wirtsprache erst, vor das Program kompiliert wird.
+    
+#### 3.3.4 Prozedurale Programmierung und SQL
+
+* Es gibt kaum einen Einheitlichkeit in der Syntax der Prozeduralen Sprachelementen. 
+* Folgendes ist vom PL/SQL. Der Syntax lehnt sich an die Sprache ADA.
+
+##### Prozeduren und Funktionen (*Stored Procedures*)
+
+* Sind in der Datenbank gespeicherte Operationen. (nicht generisch)
+* Vorzüge:
+    * Einmal geschrieben, mehrmals benutzt. PL/SQL können IO parameter haben.
+    * Durch die Trennung der Definition und Benutzung, kann der zugriffsplan Optimiert werden.
+    * Reduktion der Übertragungszeit -> nur der Pruzedur-Name muss übertragen werden. 
+    * Wenn mann den Benutzer die generische Funktionen verbieten, und vor-difinierte  denn kann mann den Benutzer nur bestimmte Änderung im Datenbestand durchführen.
+
+###### Syntax von Prozeduren
+
+````CREATE PROCEDURE <Prozedurname>(<Parameterliste>)ISBEGIN<Anweisungen>END
+````
+###### Syntax von Funktionen
+
+* Der unterschied ist, dass ein ausgezeichneter Rückgabeparameter dazu gehört.
+
+````
+CREATE FUNCTION <Funktionsname>(<Parameterliste>)
+RETURN <Typ des Rückgabewertes>ISBEGIN<Anweisungen>END
+````
+
+Beispiel:
+
+````
+CREATE PROCEDURE AssignToProject    (Angestellter IN INTEGER,    Projekt IN INTEGER,    proz_Arbeit IN INTEGER,    Gehaltsaufschlag IN INTEGER)IS
+BEGIN
+    INSERT INTO ANG_PRO        VALUES (Projekt, Angestellter, proz_Arbeit);    
+    UPDATE ANGEST        SET Gehalt = Gehalt + Gehaltsaufsc        WHERE ANGNR = Angestelter;
+END;
+````
+
+##### Trigger
+
+````
+CREATE TRIGGER <Triggername> [BEFORE|AFTER]    [INSERT, UPDATE, DELETE] ON <Tabellenname>    [FOR EACH ROW]BEGIN    <Anweisungen>END;
+````
+
+##### Cursor
+
+> Cursor sind ein Hilfsmittel, um bei der imperativen Programmierung, welche tupel-orientiert ist, einen Zugriff auf die Ergebnisse der SQL-Queries, welche mengenorientiert sind, zu erhalten (siehe auch Abschnitt 3.3.3). Zunächst wird der Cursor definiert, dann in der OPEN-Anweisung geöffnet, und anschließend wer-den die Elemente der Ergebnismenge in einer Folge von FETCH-Anweisungen durchlaufen und bearbeitet. Mit dem FOUND-Attribut des Cursors kann man fest-stellen, ob das FETCH noch ein weiteres Element geliefert hat oder ob die Ergeb-nismenge bereits vollständig durchlaufen wurde.
+
+````
+-- Der folgende Trigger prüft, ob bei den Einfügungen 
+-- in der Tabelle ANG_PRO berücksichtigt wurde, 
+-- dass der prozentuale Anteil an der Ar-beitszeit zwischen 0  
+-- und 100 Prozent liegt. Zusätzlich prüft der Trigger, 
+-- ob auch die Summe der Arbeitszeit eines jeden 
+-- Angestellten in diesem Be-reich liegt.
+
+CREATE TRIGGER ANGPROCHECK BEFORE INSERT ON    ANG_PRO
+    FOR EACH ROW    
+DECLARE    CURSOR Arbeitszeit_Cursor IS        SELECT SUM(PROZ_ARB)        FROM ANG_PRO        GROUP BY ANGNR;        Arbeitszeit INTEGER;BEGIN    IF :new.PROZ_ARB < 0 OR :new.PROZ_ARB > 100        -- :new.PROZ_ARB ist der Wert des Attributs PROZ_ARB im        -- neu einzufügenden Tupel    THEN    RAISE INVALID INSERT;
+        ELSE        OPEN Arbeitszeit_Cursor;        FETCH Arbeitszeit_Cursor INTO Arbeitszeit;    WHILE Arbeitszeit_Cursor%FOUND    LOOP        IF Arbeitszeit < 0 OR Arbeitszeit > 100 THEN            CLOSE Arbeitszeit_Cursor;            RAISE INVALID Arbeitszeit-Summe;        ELSE            FETCH Arbeitszeit_Cursor INTO Arbeitszeit;        END IF;    END LOOP;
+            CLOSE Arbeitszeit_Cursor;    END IF;END
+````
+
+### 3.4 Optimierung von Abfragen
+
+* der **Query-Prozessor** muss *Abfrageoptimierung* betreiben.
+* Abfrageoptimierung ist ein sehr komplexes Problem - und in Wirklichkeit optimieren die Systeme nicht, sondern ermitteln lediglich eine mit großer Wahrscheinlichkeit gute Ausführungsstrategie.
+
+#### Algebraische Optimierung
+
+##### Operatorbaum
+
+![operatorenbaum](img/operatorbaum.png)
+
+* Die Rechtecke stellen Relationen.
+* Die Ellipsen Operationen dar.
+
+![operatorenbaum](img/operatorbaum2.png)
+
+##### Optimierungsregeln:
+
+1. Selektionen auf dem gleichen Operanden werden zu komplexen Selektionen zusammengefasst.
+2. Selektionen werden soweit als möglich zu den Blattknoten des Operatorbaumes verschoben. Mit anderen Worten: Selektionen werden möglichst früh ausgeführt. -> *Alle Selektionen, die sich auf jeweils eine Relation beziehen, werden vor dem Join ausgeführt.*
+3. Projektionen, die keine Eliminierung von Duplikaten erfordern, werden so früh wie möglich, jedoch nicht vor jeiner Selektion durchegeführt. *Eine Projektion erfordert dann keine Elimination von Duplikaten, wenn dabei zumindest ein Schlüssel des Relationenschemas erhalten bleibt.*4. Projektionen, die eine Eliminierung von Duplikaten erfordern, sind also so-weit als möglich zur Wurzel des Operatorbaumes zu verschieben.
+5. Suche gemeinsame Teilbäume des Operatorbaums. Wenn das Ergebnis des gemeinsamen Teilausdruckes eine Relation ist, die vom Sekundärspeicher in sehr viel kürzerer Zeit gelesen werden kann, als zu ihrer Berechnung notwendig ist, so lohnt es sich, diese Zwischenrelation nur einmal zu berechnen und abzuspeichern (Hier kommt es also nicht auf eine Umstrukturierung der Ab-frage an, sondern auf das Erkennen gleicher Teilbäume).##### Optimierung auf der physischen Ebene
+###### Ausnutzung von Sekundärindexen
+* Ein Sekundärindex ist eine Datenstruktur, mit welcher der Zugriff auf einzelne Datensätze einer Menge von Datensätzen beschleunigt wird.
+* Diese Daten-struktur beinhaltet ein Verzeichnis von Wertpaaren (s, p). s ist die Ausprägung des Merkmals, für welches der Index aufgebaut wird, p ist der Ort des Datensatzes, welcher diese Merkmalsausprägung besitzt.
+
+###### Sortieren von R nach A und von S nach B
+
+>Zum Sortieren von n Tupeln werden bei Verwendung effizienter Sortierverfahren in der Größenordnung (n log n) Schritte benötigt. Das anschließende Erstellen des Verbundes ist dann sehr schnell: sind R und S sortiert, so werden sie einfach pa-rallel durchlaufen, wobei jeweils auf gleiche Werte für A und B zu prüfen ist.
+
+
+### 3.5 Implementierung eines relationalen Datenbenksystems
+
+* Es geht bei der Schichtenbildung nicht nur um die Abbildung von Relationen auf speicherbezogene Datenstrukturen, sondern auch um die geeignete Anordnung der funktionalen Komponenten    - Abfrageoptimierer,    - Autorisierung und Integritätskontrolle,    - Recovery sowie    - Synchronisation.![Softwareschichten eines DBMS](img/sofwareschichten_eines_dbms.PNG)#### Systempuffer-Manager 
+* Aufgabe des Systempuffer-Manager: 
+> die Chance möglichst groß zu halten, dass eine Seite, auf die zugegriffen werden muss, sich bereits im Arbeitsspeicher befindet
+* Der Datentransport zwischen Arbeitsspeicher und Externspeicher geschieht in Einheiten von Seiten fester Größe.
+* Die Seitenverwaltung in Datenbanksystemen muss jedoch zusätzliche Anforderungen erfüllen:    * **Pinned Pages:** Im Zusammenspiel mit der Recovery (Wiederherstellung nach Fehlern) dürfen Seiten nicht beliebig in die Datenbank geschrieben werden. Solche Seiten nennen wir pinned (festgeheftet). Beispielsweise ist Recovery nach einem Fehler sehr einfach, wenn die betroffenen Seiten noch nicht in die Datenbank zurückgeschrieben wurden.    * **forces output:** Ebenfalls im Zusammenhang mit der Recovery müssen gelegentlich Seiten auf den Externspeicher zurückgeschrieben werden, obwohl der Platz im Systempuffer gar nicht benötigt wird.    #### Zugriffsmanager
+* Stellt eine Schnittstelle zur Verfügung, in der einzelne Tupel und logische Zugriffspfade angesprochen werden können.* **Objekte der Ein-Tupel-Schnittstelle**
+    * Tupel
+    * Indexe
+> Indexe definieren eine logische Ordnung der Tupel einer Relation, so dass man über den Index auf ein erstes, zweites usw. Tupel entsprechend dieser Ordnung zugreifen kann.
+* Der Zugriffsmanager muss folgende Operatoren zur Verfügung stellen:
+    * Zugriff auf Tupel mit gegebenen Attributwerten
+    * ZUgriff auf Tupel aufgrund ihrere Position. `FIND NEXT`
+    * Bereitstellen eines Tupels in einem Übergabebereich.
+    * Einfügen, Löschen eines Tupels
+    * Verändern von Attributwerten eines Tupels.
+* Wenn die verlangte seiten nicht im Systempuffer sind, dann verlang der Zugriffsmanager die daten vom Systempuffer-Manager.
+* Zu diesen Operatoren auf Tupeln kommen solche für das Lesen von Schemaeinträgen, für das Anlegen und Löschen solcher Einträge
+* Die Ein-Tupel-Schnittstelle muss ferner geeignete Operatoren für das Transakti-onsmanagement zur Verfügung stellen.
+#### Datenmanager
+* Die Schnittstelle zwischen Anwendungsprogramm und Datensystem ist mengenorientiert, d.h. die Objekte dieser Schnittstelle sind Relationen und Tupel, die Operatoren sind relationale Sprachen, etwa SQL.* Übersetzt und OptimierT die Benutzerabfragen.* Überprüft die Zugriffsberechtigungen der Benutzer zu allen in den Anweisungen referenzierten Daten.* Integritätskontrollen durchführen.
+### 3.6 Der Datenbank-Entwurfprozess
+
+* Der Datenbank-Entwurf ist in der Regel Teil eines umfassenderen Prozesses, in dem ein Informationssystem (etwa eines Unternehmens) entwickelt wird.
+#### 3.6.1 Datenbank-Entwirf als Teil der Entwicklung von Informationstemen
+* Der Entwurfprozess der Datenbank wird als Bestandteil des Software-Entwurfprozesses für das Informationssystem des Unternehmens.
+
+##### Phasen eines Informationssystems:
+
+1. **Machbarkeitsanalyse**: wirtschaftlich und technisch durchführbar?
+2. **Erfassung und Analyse der Anforderungen**
+3. **Entwurf**
+4. **Implementierung**
+5. **Validierung und Abnahmetests**
+6. **Installation, Betrieb, Wartung**
+#### 3.6.2 Der konzeptuelle Datenbank-Entwurf
+
+* Ziele
+    * Erfüllung der Anforderungen, die an die Dateninhalte gestellt werden.
+    * Bereitstelung einer natürlichen un verständlichen Strukturierung der Informationen.
+    * Unterstützung der Verarbeitungsanforderungen
+* Das Ergebnis des Entwurfsprozesses ist ein Datenbank-Schema, das die Basis für die Implementierung der Datenbank darstellt.
+* Phasen des Datenbank-Entwurfsprozess.
+    1. Erfassung und Analyse der Anforderungen
+    2. Konzeptueller Datenbankentwurf
+    3. Wahl des DBMS
+    4. Abbildung des Entwurfes auf das Datenmodell / a.k.a. logischer Entwurf
+    5. Physischer Datenbank-Entwurf
+    6. Implementierung des Datenbanksystems und Tuning.
+* Vorteile von Erstellung eines DBMS-unabhängigen konzeptuellen Modells:
+    *  Die Modelle von Datenbanksystemen haben typischerweise spezielle Ein-schränkungen, die den konzeptuellen Entwurf nicht beeinflussen sollten
+    * Das konzeptuelle Schema bleibt stabil, selbst wenn sich das eingesetzte Da-tenbanksystem ändern sollte.
+    * Das konzeptuelle Modell stellt eine wichtige Kommunikationsplattform zwi-schen Datenbank-Designern, Anwendungsentwicklern und Benutzern dar.
+* Bei der Erstellung eines komplexen Datenbankschemas kann man zwei prinzipiel-le Ansätze unterscheiden:
+    1. Zentraler SChema-Entwurf
+    2. View-Integration
+* Aktivitäten der Integrationsphase:
+    * welche Objekte in den unter-schiedlichen Teilschemata dieselben Real-Welt-Konzepte darstellen. Es ist damit zu rechnen, dass diese Objekte nicht immer auf dieselbe Art und Weise modelliert worden sind. Beispiele für mögliche Unterschiede
+        * Unterschiedliche Benennungen zur Beschreibung desselben Konzeptes (*Synonyme*), aber auch dieselbe Benennung für unterschiedliche Konzepte (*Homonyme*).
+        * Modellierung eines Konzeptes durch unterschiedliche Modellierungskonstrukte, z.B. als Entity-Typ in Teilschema 1 und als Attribut in Teilschema 2.
+        * Zuordnung von unterschiedlichen Wertemengen, z.B. bei Benutzung von unterschiedlichen Einheiten für Attribute.
+        * Definition unterschiedlicher Constraints; so kann eine Beziehung in Teil-schema 1 etwa als 1:n Beziehung, in Teilschema 2 aber als n:m Beziehung definiert sein.
+    * Bei Vorliegen von derartigen Unterschieden müssen Teilschemata modifiziert werden, um sie untereinander konform zu machen.
+    * Mischen von Teilschemata: Sind die übereinstimmenden Konzepte gleichartig modelliert worden, so können die Teilschemata in ein globales Schema inte-griert werden, indem jedes Konzept nur noch einmal dargestellt wird. Dies ist sicher der komplexeste Schritt und erfordert eine intensive Zusammenarbeit der verschiedenen Benutzergruppen zur Lösung von Konflikten.
+    * Schließlich kann das entstandene globale Schema umstrukturiert werden, um Redundanzen und unnötige Komplexität zu eliminieren
+    
+#### 3.6.3 Abbildung von ER-Diagrammen in relationale Schemata
+##### Tranformation starker Entity-Typen
+
+>Jeder starke Entity-Typ A wird in eine Relation bzw. Tabelle RA überführt, die die Schlüsselattribute und die Nichtschlüsselattribute des entsprechenden Entity-Typs A enthält. Der Name der Relation bzw. der Tabelle RA entspricht dem Namen des Entity-Typen A. Die Attribute des Entity-Typs A werden die Attribute der Relation bzw. die Spaltennamen der entsprechenden Tabelle RA
+##### Tranformation von n:m-Beziehungstypen
+
+>Jeder n:m-Beziehungstyp X zwischen zwei Entity-Typen A und B wird in eineeigene Relation bzw. Tabelle RX überführt. Die Primärschlüssel der Relationen RAund RB werden als Fremdschlüssel in RX eingesetzt, wobei deren Kombination denPrimärschlüssel von RX bildet. Die übrigen Attribute von X werden ebenfalls in RXübernommen.
+##### Tranformation von 1:n-Beziehungstypen
+> Bei dieser Art von Beziehungstypen muss keine neue zusätzliche Relation eingeführtwerden. Stattdessen wird der Primärschlüssel der Relation, die dem Entity Typen auf der 1-Seite entspricht, als Fremdschlüssel mit in die Relation aufge-nommen, die dem Entity-Typen auf der n-Seite entspricht.
+##### Tranformation von 1:1-Beziehungstypen 
+
+> Diese Transformation wird ähnlich wie die der 1:n-Beziehungstypen gehandhabt. Auch hier muss keine neue zusätzliche Relation eingeführt werden. Seien A und B zwei Entity-Typen. Dann kann man entweder den Primärschlüssel der Relation RA in RB als Fremdschlüssel einfügen, um die Beziehung auszudrücken, oder umge-kehrt den Primärschlüssel der Relation RB in RA.
+##### Tranformation Schwacher Entity-Typen
+>Schwache Entity-Typen werden ebenfalls auf Relationen abgebildet. Jeder schwa-che Entity-Typ A wird in eine Relation RA überführt, die zunächst alle Attribute des Entity-Typen A enthält. Kann dieser Entity-Typ A nur durch einen anderen starken Entity-Typen B identifiziert werden, man spricht in diesem Zusammen-hang auch vom Owner-Typen B, so wird der Primärschlüssel der Relation RB als Fremdschlüssel in RA eingefügt. Dieser sowie der partielle Schlüssel des schwa-chen Entity-Typen A bilden den Primärschlüssel von RA.. (Unter dem partiellen Schlüssel eines schwachen Entity-Typen versteht man die Menge der Attribute, die ein Entity innerhalb der Menge der schwachen Entitäten, die zu einem Owner gehören, identifiziert.)
+##### Tranformation mehrwertiger Beziehungstypen
+> Bei den zuvor betrachteten Beziehungstypen sind wir immer davon ausgegangen,dass diese binärer Natur (n=2) sind. Mehrwertige Beziehungstypen, (n>2), werdengrundsätzlich in eine eigene Relation überführt. Sei X ein Beziehungstyp sowieA1, ..., An die n beteiligten Entity-Typen. Die Primärschlüssel der n RelationenRA1, ..., RAn werden als Fremdschlüssel in die neue Relation RX eingeführt, ebensowerden alle Attribute des Beziehungstypen X in die neue Relation RX übernommen.Der Primärschlüssel von RX entspricht der Kombination aller Fremdschlüssel,die auf die Relationen RA1, ..., RAn verweisen.
+##### Tranforamtion von Supertype/Subtyp-Hierarchien
+
+> Sei der Entity-Typ A der Supertyp der beiden Entity-Typen B und C. Alle an dieserHierarchie beteiligten Entity-Typen werden in eigene Relationen RA, RB bzw.RC überführt. Jede dieser Relationen enthält als Attribute nur die Eigenschaften,die auf der entsprechenden Stufe der Typhierarchie definiert sind und die an diedarunterliegenden Subtypen weitervererbt werden können. Die Relationen enthaltennicht die von oben geerbten Attribute. Die Relationen RB und RC haben alsPrimärschlüssel den Primärschlüssel der Relation RA, wobei diese auch alsFremdschlüssel agieren um auf RA zu verweisen.
+#### 3.6.4 Mögliche Anomalien eines Relationen-Schemas
+
+> Ein Relationenschema sollte gerade einen Entity-Typ oder einen Beziehungstypbeschreiben.
+* Web das obrige nicht eingehalten wird, dann tauchen folgende Anomalien auf:
+    * **Insertion Anomaly** *Einfüge-Anomalie*
+    * **Deletion Anomaly** *lösch-Anomalie*
+    * **Update Anomaly** *Änderungs-Anomalie*
+
+#### 3.5.6 Funktionale Abhängigkeit
+
+* **Functional Dependency**:
+>Sei $$$R(A_1, A_2, ..., A_n)$$$ ein Relationenschema und X und Y Teilmengen von $$${A_1, A_2 , ..., A_n}$$$. Dann ist Y *funktional abhängig* von X, geschrieben $$$X \\arrow Y$$$, wenn es keine Relation vom Typ R geben kann, in der zwei Tupel denselben Wert für X, aber verschiedene Werte für Y haben.
+* **Fd-Menge:** *Menge funktionaler Abhängigkeiten*
+* Die Menge F+ aller funktionalen Abhängigkeiten, die von F impliziert werden, heißt *Closure von F*.
+
+#### 3.6.6 Normalisierung
+
+* Existieren um die Anomalien zu entferden/auszuweichen.
+* **Volle Funktionale Abhängigkeit:**
+    > Für eine Fd-Menge F und eine funktionale Abhängigkeit $$$X /arrow Y \in $$$ F+ heißt Y voll funktional abhängig von X, genau dann wenn es keine echte Teilmenge X' von X gibt, so dass $$$X \\arrow Y /belongsto F+$$$.
+* **Schlüssel**:
+    > X ist Schlüssel von $$${A_1, ..., A_n}$$$ genau dann, wenn $$$X \arrow {A_1, ..., A_n} \in F+$$$ und $$${A_1, ..., A_n}$$$ ist voll funktional abhängig von X.
+
+* **Erste Normalform (1NF)**
+    > Die Werte der Wertebereiche jedes At-tributes unteilbare Werte sind und nicht ihrerseits wieder aus Mengen oder Tupeln bestehen.
+* **Zweite Normalform (2NF)**
+    > Eine Relation R ist in zweiter Normalform, wenn jedes Nichtschlüsselattribut A von R voll funktional abhängig von jedem Schlüssel X von R ist.
+* **Dritte Normalform (3NF)**
+    > Ein Relationenschema R mit Fd-Menge F ist in *dritter Normalform*, wenn für alle $$$X \arrow A \arrow F+ mit A \notin X$$$ gilt: X enthält einen Schlüssel für R oder A ist Schlüssel-attribut.
+* **Boyce-Codd Normalform (BCNF)**
+    > Eine Relation R ist in Boyce-Codd Normalform, wenn für jede funktionale Abhängigkeit$$$X \arrow A \in F+, A \notin X $$$gilt: X enthält einen Schlüssel für R.
+    * BCNF zerleggung ist nicht immer *fd-treu*
+    
+#### 3.6.7 Zusammenfassung* Entwurf von Datenbanken-Schemata:
+    * Started mit dem datenbank-unabhängigen konzeptuellen Schema -> relationales Datenbank-Schema
+    * Gütekriterien für relationale Datenbankschemata.
+    * Normalformen für das Ziel, möglichst nur einen Entity-Typ oder einen Beziehungstyp innerhalb eines Relationenschemas zu beschreiben, um so Anoma-lien zu vermeiden.
+    * Fd-Treue und Verlustlosigkeit garantieren, dass die entstehenden Zerlegungen dieselbe se-mantische Information enthalten wie die Ausgangsrelation.
