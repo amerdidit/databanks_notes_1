@@ -753,6 +753,40 @@ CREATE TRIGGER ANGPROCHECK BEFORE INSERT ON    ANG_PRO
 
 > Sei der Entity-Typ A der Supertyp der beiden Entity-Typen B und C. Alle an dieserHierarchie beteiligten Entity-Typen werden in eigene Relationen RA, RB bzw.RC überführt. Jede dieser Relationen enthält als Attribute nur die Eigenschaften,die auf der entsprechenden Stufe der Typhierarchie definiert sind und die an diedarunterliegenden Subtypen weitervererbt werden können. Die Relationen enthaltennicht die von oben geerbten Attribute. Die Relationen RB und RC haben alsPrimärschlüssel den Primärschlüssel der Relation RA, wobei diese auch alsFremdschlüssel agieren um auf RA zu verweisen.
 #### 3.6.4 Mögliche Anomalien eines Relationen-Schemas
-#### 3.5.6 Funktionale Abhängigkeit
+
+> Ein Relationenschema sollte gerade einen Entity-Typ oder einen Beziehungstypbeschreiben.
+* Web das obrige nicht eingehalten wird, dann tauchen folgende Anomalien auf:
+    * **Insertion Anomaly** *Einfüge-Anomalie*
+    * **Deletion Anomaly** *lösch-Anomalie*
+    * **Update Anomaly** *Änderungs-Anomalie*
+
+#### 3.5.6 Funktionale Abhängigkeit
+
+* **Functional Dependency**:
+>Sei $$$R(A_1, A_2, ..., A_n)$$$ ein Relationenschema und X und Y Teilmengen von $$${A_1, A_2 , ..., A_n}$$$. Dann ist Y *funktional abhängig* von X, geschrieben $$$X \\arrow Y$$$, wenn es keine Relation vom Typ R geben kann, in der zwei Tupel denselben Wert für X, aber verschiedene Werte für Y haben.
+* **Fd-Menge:** *Menge funktionaler Abhängigkeiten*
+* Die Menge F+ aller funktionalen Abhängigkeiten, die von F impliziert werden, heißt *Closure von F*.
+
 #### 3.6.6 Normalisierung
-#### 3.6.7 Zusammenfassung
+
+* Existieren um die Anomalien zu entferden/auszuweichen.
+* **Volle Funktionale Abhängigkeit:**
+    > Für eine Fd-Menge F und eine funktionale Abhängigkeit $$$X /arrow Y \in $$$ F+ heißt Y voll funktional abhängig von X, genau dann wenn es keine echte Teilmenge X' von X gibt, so dass $$$X \\arrow Y /belongsto F+$$$.
+* **Schlüssel**:
+    > X ist Schlüssel von $$${A_1, ..., A_n}$$$ genau dann, wenn $$$X \arrow {A_1, ..., A_n} \in F+$$$ und $$${A_1, ..., A_n}$$$ ist voll funktional abhängig von X.
+
+* **Erste Normalform (1NF)**
+    > Die Werte der Wertebereiche jedes At-tributes unteilbare Werte sind und nicht ihrerseits wieder aus Mengen oder Tupeln bestehen.
+* **Zweite Normalform (2NF)**
+    > Eine Relation R ist in zweiter Normalform, wenn jedes Nichtschlüsselattribut A von R voll funktional abhängig von jedem Schlüssel X von R ist.
+* **Dritte Normalform (3NF)**
+    > Ein Relationenschema R mit Fd-Menge F ist in *dritter Normalform*, wenn für alle $$$X \arrow A \arrow F+ mit A \notin X$$$ gilt: X enthält einen Schlüssel für R oder A ist Schlüssel-attribut.
+* **Boyce-Codd Normalform (BCNF)**
+    > Eine Relation R ist in Boyce-Codd Normalform, wenn für jede funktionale Abhängigkeit$$$X \arrow A \in F+, A \notin X $$$gilt: X enthält einen Schlüssel für R.
+    * BCNF zerleggung ist nicht immer *fd-treu*
+    
+#### 3.6.7 Zusammenfassung* Entwurf von Datenbanken-Schemata:
+    * Started mit dem datenbank-unabhängigen konzeptuellen Schema -> relationales Datenbank-Schema
+    * Gütekriterien für relationale Datenbankschemata.
+    * Normalformen für das Ziel, möglichst nur einen Entity-Typ oder einen Beziehungstyp innerhalb eines Relationenschemas zu beschreiben, um so Anoma-lien zu vermeiden.
+    * Fd-Treue und Verlustlosigkeit garantieren, dass die entstehenden Zerlegungen dieselbe se-mantische Information enthalten wie die Ausgangsrelation.
